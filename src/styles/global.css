@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #ffffff;
+  --white90: #ffffffe6;
+  --white60: #ffffff99;
+
+  --text: #252527;
+  --text85: #252527d9;
+  --text50: #25252780;
+
+  --background-color: #f2e9e4;
+
+  --primary: #aa906b;
+  --primary60: #aa906b99;
+
+  --alert: #fb4d3d;
+  --warning: #e7bb41;
+
+  --whatsapp: #25d366;
+  --facebook: '#3B5998';
+  --email: '#0064B0';
+}
+
+html,
+body {
+  width: 100%;
+
+  background: var(--background-color);
+  color: var(--text);
+}
+
+body,
+input,
+button,
+textarea {
+  font:
+    400 1rem 'Inter',
+    sans-serif;
+}
+
+@media (max-width: 768px) {
+  body,
+  input,
+  button,
+  textarea {
+    font-size: 90%;
+  }
+}
