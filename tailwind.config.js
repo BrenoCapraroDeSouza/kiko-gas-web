@@ -10,9 +10,9 @@ export default {
         secondary: '#FFF',
         secondary70: 'rgba(255, 255, 255, 0.7)',
 
-        text: '#000',
+        background: '#000',
         overlay40: 'rgba(0, 0, 0, 0.4)',
-        background: '#151515',
+        content: '#151515',
       },
 
       fontFamily: {
