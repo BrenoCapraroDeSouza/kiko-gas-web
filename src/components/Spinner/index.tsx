@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { Colors, SpinnerProps } from '@/@types';
 
 function Spinner(props: SpinnerProps) {
-  const { color = 'primary', size = 'large' } = props;
+  const { color = 'secondary', size = 'large' } = props;
 
   const spinnerColors: Record<Colors, string> = {
     primary: 'text-primary',

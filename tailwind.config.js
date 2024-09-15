@@ -3,6 +3,10 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      height: {
+        15: '3.75rem',
+      },
+
       colors: {
         primary: '#FF6C25',
         primary50: 'rgba(255, 108, 37, 0.5)',
@@ -21,7 +25,7 @@ export default {
 
       boxShadow: {
         default:
-          '0px 0px 24px 0px rgba(255, 108, 37, 0.5), 0px 0px 24px 0px rgba(255, 108, 37, 0.5)',
+          '0px 0px 16px 0px rgba(255, 108, 37, 0.5), 0px 0px 16px 0px rgba(255, 108, 37, 0.5)',
       },
     },
   },
