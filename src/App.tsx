@@ -1,5 +1,7 @@
+import { Spinner } from '@/components';
+
 function App() {
-  return <h1>Hello World!</h1>;
+  return <Spinner />;
 }
 
 export default App;
