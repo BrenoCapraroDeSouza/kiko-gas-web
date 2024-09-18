@@ -1,6 +1,7 @@
-import { memo, useState } from 'react';
+import { ChangeEvent, memo, useState } from 'react';
+import { PatternFormat } from 'react-number-format';
 
-import { InputProps } from '@/@types';
+import { InputProps, InputType } from '@/@types';
 
 import { Icon } from '..';
 
@@ -29,19 +30,40 @@ function Input(props: InputProps) {
   const width = isHugWidth ? 'w-full' : 'w-auto';
   const cursor = isDisabled ? 'cursor-not-allowed' : 'cursor-pointer';
 
+  const commonInputProps = {
+    value,
+    placeholder,
+    className: `w-full h-full pr-4 bg-transparent font-poppins font-medium text-base ${cursor} outline-none placeholder:text-secondary70 disabled:text-secondary70`,
+    disabled: isDisabled,
+    required: isRequired,
+    onChange: (event: ChangeEvent<HTMLInputElement>) =>
+      handleChangeText(event.target.value),
+  };
+
+  const defaultInput: React.JSX.Element = (
+    <input type={isVisibleText ? 'text' : type} {...commonInputProps} />
+  );
+
+  const inputs: Record<InputType, React.JSX.Element> = {
+    email: defaultInput,
+    password: defaultInput,
+    text: defaultInput,
+    document: <></>,
+    tel: (
+      <PatternFormat
+        type='tel'
+        format='(##) # ####-####'
+        mask='_'
+        {...commonInputProps}
+      />
+    ),
+  };
+
   return (
     <div
       className={`flex ${width} h-15 px-4 py-2 items-center border-solid border-secondary70 border ${cursor} rounded overflow-hidden`}
     >
-      <input
-        value={value}
-        type={isVisibleText ? 'text' : type}
-        placeholder={placeholder}
-        className={`w-full h-full pr-4 bg-transparent font-poppins font-medium text-base ${cursor} outline-none placeholder:text-secondary70 disabled:text-secondary70`}
-        disabled={isDisabled}
-        required={isRequired}
-        onChange={event => handleChangeText(event.target.value)}
-      />
+      {inputs[type]}
 
       {isPassword && (
         <button

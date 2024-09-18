@@ -1,7 +1,7 @@
 import { Input } from '@/components';
 
 function App() {
-  return <Input placeholder='Text' type='password' />;
+  return <Input placeholder='Telefone' type='tel' />;
 }
 
 export default App;
