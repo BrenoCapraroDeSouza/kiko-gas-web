@@ -1,7 +1,7 @@
-import { Text } from '@/components';
+import { Input } from '@/components';
 
 function App() {
-  return <Text>Hello World!</Text>;
+  return <Input placeholder='Text' type='password' />;
 }
 
 export default App;
