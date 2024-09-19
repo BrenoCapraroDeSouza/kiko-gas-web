@@ -1,5 +1,5 @@
 import {
-  ArrowCounterClockwise,
+  ArrowsCounterClockwise,
   Eye,
   EyeSlash,
   Pencil,
@@ -21,7 +21,7 @@ function Icon(props: IconProps) {
 
   const icons: Record<IconVariant, React.JSX.Element> = {
     'arrows-counter-clockwise': (
-      <ArrowCounterClockwise color={iconColor} size={iconSizes[size]} />
+      <ArrowsCounterClockwise color={iconColor} size={iconSizes[size]} />
     ),
     'eye-slash': <EyeSlash color={iconColor} size={iconSizes[size]} />,
     eye: <Eye color={iconColor} size={iconSizes[size]} />,

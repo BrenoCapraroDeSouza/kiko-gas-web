@@ -3,7 +3,7 @@ import { PatternFormat } from 'react-number-format';
 
 import { InputProps, InputType } from '@/@types';
 
-import { Icon } from '..';
+import { Icon, Text } from '..';
 
 function Input(props: InputProps) {
   const {
@@ -17,23 +17,30 @@ function Input(props: InputProps) {
   } = props;
 
   const [isVisibleText, setIsVisibleText] = useState<boolean>(false);
+  const [isCPF, setIsCPF] = useState<boolean>(true);
 
   function handleVisibilityChange(): void {
     setIsVisibleText(!isVisibleText);
+  }
+
+  function handleDocumentChange(): void {
+    setIsCPF(!isCPF);
   }
 
   function handleChangeText(text: string): void {
     if (onChangeText) onChangeText(text);
   }
 
+  const isDocument = type === 'document';
   const isPassword = type === 'password';
   const width = isHugWidth ? 'w-full' : 'w-auto';
+  const paddingRight = isDocument || isPassword ? 'pr-4' : 'pr-0';
   const cursor = isDisabled ? 'cursor-not-allowed' : 'cursor-pointer';
 
   const commonInputProps = {
     value,
-    placeholder,
-    className: `w-full h-full pr-4 bg-transparent font-poppins font-medium text-base ${cursor} outline-none placeholder:text-secondary70 disabled:text-secondary70`,
+    placeholder: isDocument ? (isCPF ? 'CPF' : 'CNPJ') : placeholder,
+    className: `w-full h-full ${paddingRight} bg-transparent font-poppins font-medium text-base ${cursor} outline-none placeholder:text-secondary70 disabled:text-secondary70`,
     disabled: isDisabled,
     required: isRequired,
     onChange: (event: ChangeEvent<HTMLInputElement>) =>
@@ -48,12 +55,19 @@ function Input(props: InputProps) {
     email: defaultInput,
     password: defaultInput,
     text: defaultInput,
-    document: <></>,
+    document: (
+      <PatternFormat
+        type='tel'
+        mask='_'
+        format={isCPF ? '###.###.###-##' : '##.###.###/####-##'}
+        {...commonInputProps}
+      />
+    ),
     tel: (
       <PatternFormat
         type='tel'
-        format='(##) # ####-####'
         mask='_'
+        format='(##) # ####-####'
         {...commonInputProps}
       />
     ),
@@ -73,6 +87,20 @@ function Input(props: InputProps) {
           disabled={isDisabled}
         >
           <Icon variant={isVisibleText ? 'eye-slash' : 'eye'} />
+        </button>
+      )}
+
+      {isDocument && (
+        <button
+          className={`flex w-auto h-6 items-center gap-1 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-90 disabled:hover:opacity-90 focus:outline-none focus:ring focus:ring-secondary`}
+          type='button'
+          title={`Mudar tipo de documento para ${isCPF ? 'CNPJ' : 'CPF'}`}
+          onClick={handleDocumentChange}
+          disabled={isDisabled}
+        >
+          <Icon variant='arrows-counter-clockwise' />
+
+          <Text>{isCPF ? 'CPF' : 'CNPJ'}</Text>
         </button>
       )}
     </div>
