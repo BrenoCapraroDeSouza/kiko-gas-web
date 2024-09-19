@@ -81,7 +81,7 @@ function Input(props: InputProps) {
 
       {isPassword && (
         <button
-          className={`size-6 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-90 disabled:hover:opacity-90 focus:outline-none focus:ring focus:ring-secondary`}
+          className={`size-6 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-90 disabled:hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary focus-visible:rounded`}
           type='button'
           onClick={handleVisibilityChange}
           disabled={isDisabled}
@@ -92,7 +92,7 @@ function Input(props: InputProps) {
 
       {isDocument && (
         <button
-          className={`flex w-auto h-6 items-center gap-1 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-90 disabled:hover:opacity-90 focus:outline-none focus:ring focus:ring-secondary`}
+          className={`flex w-auto h-6 items-center gap-1 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-90 disabled:hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary focus-visible:rounded`}
           type='button'
           title={`Mudar tipo de documento para ${isCPF ? 'CNPJ' : 'CPF'}`}
           onClick={handleDocumentChange}
