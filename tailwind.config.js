@@ -27,6 +27,10 @@ export default {
         default:
           '0px 0px 16px 0px rgba(255, 108, 37, 0.5), 0px 0px 16px 0px rgba(255, 108, 37, 0.5)',
       },
+
+      width: {
+        128: '32rem',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')],
