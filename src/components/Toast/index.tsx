@@ -1,11 +1,8 @@
 import { memo } from 'react';
 
-import { Text } from '..';
+import { ToastProps } from '@/@types';
 
-interface ToastProps {
-  title: string;
-  message: string;
-}
+import { Text } from '..';
 
 function Toast(props: ToastProps) {
   const { message, title } = props;
