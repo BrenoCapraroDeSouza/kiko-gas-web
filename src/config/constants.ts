@@ -11,3 +11,5 @@ export const COLORS_PALETTE: Record<Colors, string> = {
   overlay40: 'rgba(0, 0, 0, 0.4)',
   content: '#151515',
 };
+
+export const DEFAULT_TOAST_DURATION: number = 5_000;

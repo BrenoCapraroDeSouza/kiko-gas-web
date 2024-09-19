@@ -25,6 +25,7 @@ function Text(props: TextProps) {
     body: 'text-base',
     alternative: 'text-xl',
     title: 'text-2xl',
+    small: 'text-xs',
   };
 
   const textWeights: Record<TextWeight, string> = {
