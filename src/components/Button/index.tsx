@@ -21,7 +21,7 @@ function Button(props: ButtonProps) {
 
   return (
     <button
-      className={`flex ${width} h-15 justify-center items-center ${backgroundColor} rounded ${cursor} shadow-default hover:opacity-90 transition-colors duration-300 disabled:hover:opacity-100 focus-visible:outline-none focus-visible:ring focus-visible:ring-secondary`}
+      className={`flex ${width} h-15 justify-center items-center px-4 ${backgroundColor} rounded ${cursor} shadow-default disabled:shadow-none hover:opacity-90 transition-colors duration-300 disabled:hover:opacity-100 focus-visible:outline-none focus-visible:ring focus-visible:ring-secondary`}
       type={type}
       disabled={isDisabled}
       onClick={onClick}
