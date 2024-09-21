@@ -5,6 +5,7 @@ import { InputProps, InputType } from '@/@types';
 
 import { Icon, Text } from '..';
 
+// TODO: Remove underline string when user use input type `tel` and `document`
 function Input(props: InputProps) {
   const {
     value,

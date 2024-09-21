@@ -1,14 +1,8 @@
 import { memo } from 'react';
 
-import { IconVariant } from '@/@types';
+import { AddButtonProps } from '@/@types';
 
 import { Icon } from '..';
-
-export interface AddButtonProps {
-  variant?: IconVariant;
-  title?: string;
-  onClick?: () => void;
-}
 
 function AddButton(props: AddButtonProps) {
   const { variant = 'user-plus', title, onClick } = props;

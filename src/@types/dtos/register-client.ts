@@ -14,3 +14,17 @@ export interface RegisterClientDTOProps {
   confirmPassword: string;
   gasCylinders: GasCylidersDTOProps[];
 }
+
+export type RegistrationClientDTOProps = Omit<
+  RegisterClientDTOProps,
+  'gasCylinders'
+> & {
+  onNextStep: (data: Omit<RegisterClientDTOProps, 'gasCylinders'>) => void;
+};
+
+export type FinancialClientDTOProps = Pick<
+  RegisterClientDTOProps,
+  'gasCylinders'
+> & {
+  onFinish: (data: Pick<RegisterClientDTOProps, 'gasCylinders'>) => void;
+};
