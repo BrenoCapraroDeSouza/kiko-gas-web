@@ -3,6 +3,7 @@ import { FormEvent, memo, useState } from 'react';
 import { RegistrationClientDTOProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
 import { useToaster } from '@/hooks';
+import { getOnlyNumbers } from '@/utils';
 
 function RegistrationData(props: RegistrationClientDTOProps) {
   const { onNextStep, ...rest } = props;
@@ -36,11 +37,12 @@ function RegistrationData(props: RegistrationClientDTOProps) {
   }
 
   const isValidPhone = !!(
-    registration.phone && registration.phone.length === 16
+    registration.phone && getOnlyNumbers(registration.phone).length === 11
   );
   const isValidDocument = !!(
     registration.cpfcnpj &&
-    (registration.cpfcnpj.length === 14 || registration.cpfcnpj.length === 18)
+    (getOnlyNumbers(registration.cpfcnpj).length === 11 ||
+      getOnlyNumbers(registration.cpfcnpj).length === 14)
   );
 
   const isDisabled =
