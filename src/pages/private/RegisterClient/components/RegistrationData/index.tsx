@@ -36,13 +36,13 @@ function RegistrationData(props: RegistrationClientDTOProps) {
     onNextStep(registration);
   }
 
+  const isCNPJ = registration.cpfcnpj && registration.cpfcnpj.includes('/');
   const isValidPhone = !!(
     registration.phone && getOnlyNumbers(registration.phone).length === 11
   );
   const isValidDocument = !!(
     registration.cpfcnpj &&
-    (getOnlyNumbers(registration.cpfcnpj).length === 11 ||
-      getOnlyNumbers(registration.cpfcnpj).length === 14)
+    getOnlyNumbers(registration.cpfcnpj).length === (isCNPJ ? 14 : 11)
   );
 
   const isDisabled =

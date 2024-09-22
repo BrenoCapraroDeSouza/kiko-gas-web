@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useState } from 'react';
+import { ChangeEvent, memo, useEffect, useState } from 'react';
 import { PatternFormat } from 'react-number-format';
 
 import { InputProps, InputType } from '@/@types';
@@ -7,17 +7,18 @@ import { Icon, Text } from '..';
 
 function Input(props: InputProps) {
   const {
-    value,
     isDisabled = false,
     isRequired = false,
     isHugWidth = false,
+    value = '',
     placeholder = '',
     type = 'text',
     onChangeText,
   } = props;
 
-  const [isVisibleText, setIsVisibleText] = useState<boolean>(false);
   const [isCPF, setIsCPF] = useState<boolean>(true);
+  const [isVisibleText, setIsVisibleText] = useState<boolean>(false);
+  const [inputValue, setInputValue] = useState<string>(value);
 
   function handleVisibilityChange(): void {
     setIsVisibleText(!isVisibleText);
@@ -28,6 +29,8 @@ function Input(props: InputProps) {
   }
 
   function handleChangeText(text: string): void {
+    setInputValue(text);
+
     if (onChangeText) onChangeText(text);
   }
 
@@ -38,7 +41,7 @@ function Input(props: InputProps) {
   const cursor = isDisabled ? 'cursor-not-allowed' : 'cursor-pointer';
 
   const commonInputProps = {
-    value,
+    value: inputValue,
     placeholder: isDocument ? (isCPF ? 'CPF' : 'CNPJ') : placeholder,
     className: `w-full h-full ${paddingRight} bg-transparent font-poppins font-medium text-base ${cursor} outline-none placeholder:text-secondary70 disabled:text-secondary70`,
     disabled: isDisabled,
@@ -73,6 +76,12 @@ function Input(props: InputProps) {
     ),
   };
 
+  useEffect(() => {
+    setInputValue('');
+
+    if (onChangeText) onChangeText('');
+  }, [isCPF]);
+
   return (
     <div
       className={`flex ${width} h-15 px-4 py-2 items-center border-solid border-secondary70 border ${cursor} rounded overflow-hidden`}
@@ -100,7 +109,7 @@ function Input(props: InputProps) {
         >
           <Icon variant='arrows-counter-clockwise' />
 
-          <Text>{isCPF ? 'CPF' : 'CNPJ'}</Text>
+          <Text>{isCPF ? 'CNPJ' : 'CPF'}</Text>
         </button>
       )}
     </div>
