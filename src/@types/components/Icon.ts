@@ -13,7 +13,9 @@ export type IconVariant =
   | 'phone'
   | 'info'
   | 'user-plus'
-  | 'x';
+  | 'x'
+  | 'cylinder'
+  | 'plus';
 
 export type IconSize = 'default' | 'small' | 'large' | 'giant';
 
