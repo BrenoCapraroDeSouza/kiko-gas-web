@@ -9,8 +9,6 @@ export function RegisterClient() {
     {} as RegisterClientDTOProps,
   );
 
-  console.log(newClient);
-
   return (
     <main className='flex w-full h-screen items-center justify-center p-4 bg-background'>
       <RegistrationData

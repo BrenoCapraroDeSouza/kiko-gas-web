@@ -1,17 +1,15 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { Login } from '../pages';
-import { CadastroCliente } from '../pages/public/Clients of Resaler/index';
-import { NotFound } from '../pages/public/Not Found/index';
+import { Login, NotFound, RegisterClient } from '../pages';
 
 export function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login />} />
+        <Route path='/' element={<Navigate to='/login' />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/cadastro' element={<CadastroCliente />} />
-        <Route path='/notfound' element={<NotFound />} />
+        <Route path='/register/client' element={<RegisterClient />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
