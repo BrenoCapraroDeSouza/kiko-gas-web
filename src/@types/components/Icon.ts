@@ -18,7 +18,9 @@ export type IconVariant =
   | 'plus'
   | 'backspace'
   | 'hand'
-  | 'map-pin-simple';
+  | 'map-pin-simple'
+  | 'money'
+  | 'pix-logo';
 
 export type IconSize = 'default' | 'small' | 'large' | 'giant';
 

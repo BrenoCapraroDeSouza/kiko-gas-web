@@ -9,8 +9,10 @@ import {
   IconProps as PhosphorIconProps,
   Info,
   MapPinSimple,
+  Money,
   Pencil,
   Phone,
+  PixLogo,
   Plus,
   SignOut,
   Trash,
@@ -45,6 +47,7 @@ function Icon(props: IconProps) {
     'sing-out': <SignOut {...commonIconProps} />,
     'user-plus': <UserPlus {...commonIconProps} />,
     'map-pin-simple': <MapPinSimple {...commonIconProps} />,
+    'pix-logo': <PixLogo {...commonIconProps} />,
     eye: <Eye {...commonIconProps} />,
     pencil: <Pencil {...commonIconProps} />,
     trash: <Trash {...commonIconProps} />,
@@ -58,6 +61,7 @@ function Icon(props: IconProps) {
     plus: <Plus {...commonIconProps} />,
     backspace: <Backspace {...commonIconProps} />,
     hand: <Hand {...commonIconProps} />,
+    money: <Money {...commonIconProps} />,
   };
 
   return icons[variant];
