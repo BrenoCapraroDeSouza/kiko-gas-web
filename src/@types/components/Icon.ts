@@ -15,7 +15,10 @@ export type IconVariant =
   | 'user-plus'
   | 'x'
   | 'cylinder'
-  | 'plus';
+  | 'plus'
+  | 'backspace'
+  | 'hand'
+  | 'map-pin-simple';
 
 export type IconSize = 'default' | 'small' | 'large' | 'giant';
 

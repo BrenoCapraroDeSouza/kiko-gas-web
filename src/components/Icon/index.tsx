@@ -1,11 +1,14 @@
 import {
   ArrowsCounterClockwise,
   At,
+  Backspace,
   Cylinder,
   Eye,
   EyeSlash,
+  Hand,
   IconProps as PhosphorIconProps,
   Info,
+  MapPinSimple,
   Pencil,
   Phone,
   Plus,
@@ -39,11 +42,12 @@ function Icon(props: IconProps) {
   const icons: Record<IconVariant, React.JSX.Element> = {
     'arrows-counter-clockwise': <ArrowsCounterClockwise {...commonIconProps} />,
     'eye-slash': <EyeSlash {...commonIconProps} />,
+    'sing-out': <SignOut {...commonIconProps} />,
+    'user-plus': <UserPlus {...commonIconProps} />,
+    'map-pin-simple': <MapPinSimple {...commonIconProps} />,
     eye: <Eye {...commonIconProps} />,
     pencil: <Pencil {...commonIconProps} />,
     trash: <Trash {...commonIconProps} />,
-    'sing-out': <SignOut {...commonIconProps} />,
-    'user-plus': <UserPlus {...commonIconProps} />,
     at: <At {...commonIconProps} />,
     info: <Info {...commonIconProps} />,
     phone: <Phone {...commonIconProps} />,
@@ -52,6 +56,8 @@ function Icon(props: IconProps) {
     x: <X {...commonIconProps} />,
     cylinder: <Cylinder {...commonIconProps} />,
     plus: <Plus {...commonIconProps} />,
+    backspace: <Backspace {...commonIconProps} />,
+    hand: <Hand {...commonIconProps} />,
   };
 
   return icons[variant];
