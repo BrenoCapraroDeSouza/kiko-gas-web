@@ -13,3 +13,5 @@ export const COLORS_PALETTE: Record<Colors, string> = {
 };
 
 export const DEFAULT_TOAST_DURATION: number = 5_000;
+
+export const API_URL: string = 'https://kiko-gas-api.onrender.com';

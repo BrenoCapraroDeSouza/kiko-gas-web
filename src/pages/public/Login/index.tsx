@@ -1,17 +1,38 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import { LoginDTOProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
 import { PRIMARY_LOGO } from '@/config';
+import { useAuth, useLogin, useToaster } from '@/hooks';
 
 export function Login() {
+  const { changeToLogged } = useAuth();
+  const { isLoginError, isLoginLoading, setIsLoginError, login } = useLogin();
+
+  const [showToast] = useToaster();
+
   const [userCredentials, setUserCredentials] = useState<LoginDTOProps>(
     {} as LoginDTOProps,
   );
 
-  function onSubmit(event: FormEvent<HTMLFormElement>): void {
+  async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
+
+    await login(userCredentials);
+
+    changeToLogged();
   }
+
+  useEffect(() => {
+    if (isLoginError) {
+      setIsLoginError(false);
+
+      return showToast(
+        'Ops! Parece que algo não deu certo',
+        'Verifique suas credenciais e tente novamente.',
+      );
+    }
+  }, [isLoginError, setIsLoginError, showToast]);
 
   return (
     <main className='flex h-screen bg-background'>
@@ -34,26 +55,36 @@ export function Login() {
           <div className='flex flex-col gap-6'>
             <Input
               type='email'
+              value={userCredentials?.email}
               placeholder='E-mail'
               onChangeText={email =>
                 setUserCredentials({ ...userCredentials, email })
               }
+              isDisabled={isLoginLoading}
               isRequired
               isHugWidth
             />
 
             <Input
               type='password'
+              value={userCredentials?.password}
               placeholder='Senha'
               onChangeText={password =>
                 setUserCredentials({ ...userCredentials, password })
               }
+              isDisabled={isLoginLoading}
               isRequired
               isHugWidth
             />
           </div>
 
-          <Button type='submit' title='Entrar' isHugWidth />
+          <Button
+            type='submit'
+            title='Entrar'
+            isDisabled={isLoginLoading}
+            isLoading={isLoginLoading}
+            isHugWidth
+          />
         </form>
       </aside>
     </main>

@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Toaster } from 'sonner';
 
-import { DEFAULT_TOAST_DURATION } from './config';
-import { Router } from './routes';
+import { DEFAULT_TOAST_DURATION } from '@/config';
+import { AuthProvider } from '@/contexts';
+import { Router } from '@/routes';
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,9 @@ function App() {
         }}
       />
 
-      <Router />
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
