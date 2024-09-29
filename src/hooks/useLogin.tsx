@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 
@@ -8,19 +7,15 @@ import { api } from '@/config';
 export function useLogin() {
   const [isLoginError, setIsLoginError] = useState<boolean>(false);
 
-  async function fetchMutation(
-    user: LoginDTOProps,
-  ): Promise<LoginResponseDTOProps> {
+  async function fetchMutation(user: LoginDTOProps): Promise<void> {
     const { data } = await api.post<LoginResponseDTOProps>('/login', user);
 
-    Cookies.set('token', data.token, { expires: 7, path: '/' });
-    Cookies.set('name', data.name, { expires: 7, path: '/' });
-
-    return data;
+    localStorage.setItem('token', JSON.stringify(data.token));
+    localStorage.setItem('name', JSON.stringify(data.name));
   }
 
   const { isLoading: isLoginLoading, mutateAsync: login } = useMutation<
-    LoginResponseDTOProps | Error,
+    void,
     Error,
     LoginDTOProps
   >({
