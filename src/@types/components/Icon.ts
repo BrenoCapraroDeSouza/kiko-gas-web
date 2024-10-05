@@ -6,7 +6,7 @@ export type IconVariant =
   | 'pencil'
   | 'trash'
   | 'arrows-counter-clockwise'
-  | 'sing-out'
+  | 'sign-out'
   | 'tray'
   | 'at'
   | 'user'

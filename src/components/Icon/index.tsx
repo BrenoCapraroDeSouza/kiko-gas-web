@@ -44,7 +44,7 @@ function Icon(props: IconProps) {
   const icons: Record<IconVariant, React.JSX.Element> = {
     'arrows-counter-clockwise': <ArrowsCounterClockwise {...commonIconProps} />,
     'eye-slash': <EyeSlash {...commonIconProps} />,
-    'sing-out': <SignOut {...commonIconProps} />,
+    'sign-out': <SignOut {...commonIconProps} />,
     'user-plus': <UserPlus {...commonIconProps} />,
     'map-pin-simple': <MapPinSimple {...commonIconProps} />,
     'pix-logo': <PixLogo {...commonIconProps} />,
