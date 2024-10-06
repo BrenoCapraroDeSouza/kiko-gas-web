@@ -5,5 +5,6 @@ export * from './Icon';
 export * from './Input';
 export * from './ProtectedRoute';
 export * from './Spinner';
+export * from './TabButton';
 export * from './Text';
 export * from './Toast';

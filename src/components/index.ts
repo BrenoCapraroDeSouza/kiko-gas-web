@@ -5,6 +5,7 @@ import Icon from './Icon';
 import Input from './Input';
 import ProtectedRoute from './ProtectedRoute';
 import Spinner from './Spinner';
+import TabButton from './TabButton';
 import Text from './Text';
 import Toast from './Toast';
 
@@ -16,6 +17,7 @@ export {
   Input,
   ProtectedRoute,
   Spinner,
+  TabButton,
   Text,
   Toast,
 };
