@@ -1,4 +1,10 @@
-export type InputType = 'email' | 'password' | 'tel' | 'text' | 'document';
+export type InputType =
+  | 'email'
+  | 'password'
+  | 'tel'
+  | 'text'
+  | 'document'
+  | 'currency';
 
 export interface InputProps {
   value?: string;

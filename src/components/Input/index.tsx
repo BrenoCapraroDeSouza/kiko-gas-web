@@ -1,5 +1,5 @@
 import { ChangeEvent, memo, useEffect, useState } from 'react';
-import { PatternFormat } from 'react-number-format';
+import { NumericFormat, PatternFormat } from 'react-number-format';
 
 import { InputProps, InputType } from '@/@types';
 
@@ -71,6 +71,22 @@ function Input(props: InputProps) {
         type='tel'
         mask='_'
         format='(##) # ####-####'
+        {...commonInputProps}
+      />
+    ),
+    currency: (
+      <NumericFormat
+        thousandsGroupStyle='thousand'
+        thousandSeparator='.'
+        prefix='R$ '
+        decimalSeparator=','
+        decimalScale={2}
+        allowLeadingZeros
+        allowNegative={false}
+        maxLength={11}
+        minLength={0}
+        max={9999}
+        min={0}
         {...commonInputProps}
       />
     ),
