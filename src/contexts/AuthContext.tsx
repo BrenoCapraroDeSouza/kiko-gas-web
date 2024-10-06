@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
 import { AuthContextProps } from '@/@types';
+import { Storage } from '@/helpers';
 import { useRefresh } from '@/hooks';
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -8,20 +9,19 @@ export const AuthContext = createContext({} as AuthContextProps);
 export function AuthProvider({ children }: Required<PropsWithChildren>) {
   const { isRefreshError, refresh } = useRefresh();
 
-  const hasToken = !!localStorage.getItem('token');
+  const hasToken = Storage.hasItem('token');
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(hasToken);
 
   async function changeToLogged(): Promise<void> {
-    const newTokenExists = !!localStorage.getItem('token');
+    const newTokenExists = Storage.hasItem('token');
     setIsAuthenticated(newTokenExists);
   }
 
   function handleLogout(): void {
     setIsAuthenticated(false);
 
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
+    Storage.clear();
   }
 
   useEffect(() => {

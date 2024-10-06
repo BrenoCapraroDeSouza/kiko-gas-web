@@ -3,6 +3,7 @@ import { useMutation } from 'react-query';
 
 import { LoginResponseDTOProps } from '@/@types';
 import { api } from '@/config';
+import { Storage } from '@/helpers';
 
 export function useRefresh() {
   const [isRefreshDone, setIsRefreshDone] = useState<boolean>(false);
@@ -10,22 +11,22 @@ export function useRefresh() {
   async function fetchMutation(): Promise<void> {
     if (isRefreshDone) return;
 
-    const accessToken = localStorage.getItem('token')!;
+    const accessToken = Storage.getItem('token');
 
     const { data } = await api.post<LoginResponseDTOProps>(
       '/refresh',
       {},
       {
         headers: {
-          Authorization: `Bearer ${JSON.parse(accessToken)}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       },
     );
 
     setIsRefreshDone(true);
 
-    localStorage.setItem('token', JSON.stringify(data.token));
-    localStorage.setItem('name', JSON.stringify(data.name));
+    Storage.setItem('token', JSON.stringify(data.token));
+    Storage.setItem('name', JSON.stringify(data.name));
   }
 
   const { isError: isRefreshError, mutateAsync: refresh } = useMutation({
@@ -34,8 +35,7 @@ export function useRefresh() {
     onError: () => {
       setIsRefreshDone(false);
 
-      localStorage.removeItem('token');
-      localStorage.removeItem('name');
+      Storage.clear();
     },
   });
 
