@@ -3,17 +3,16 @@ import { ptBR } from 'date-fns/locale';
 import { memo } from 'react';
 
 import { HeaderProps } from '@/@types';
-import { Storage } from '@/helpers';
-import { useAuth } from '@/hooks';
+import { useAuth, useDashboard } from '@/hooks';
 
-import { Icon, Text } from '..';
+import { Icon, TabButton, Text } from '..';
 
 function Header(props: HeaderProps) {
   const { actions } = props;
 
   const { handleLogout } = useAuth();
+  const { username, currentTab, changeToNextTab } = useDashboard();
 
-  const resellerName = Storage.getItem('name');
   const formattedCurrentDate = format(new Date(), "EEEE, dd 'de' MMMM", {
     locale: ptBR,
   });
@@ -35,7 +34,7 @@ function Header(props: HeaderProps) {
 
         <div className='flex flex-col items-end gap-2'>
           <Text size='alternative' weight='semibold'>
-            Olá, revendedor(a) {resellerName}
+            {`Olá, revendedor(a) ${username}`.trim()}
           </Text>
 
           <Text
@@ -50,8 +49,15 @@ function Header(props: HeaderProps) {
 
       <div className='flex w-full h-full justify-evenly items-end mt-5 gap-10'>
         {actions.map(action => (
-          <div className='flex w-64 h-16 justify-center items-center'>
-            {action.button}
+          <div
+            key={action.key}
+            className='flex w-64 h-16 justify-center items-center'
+          >
+            <TabButton
+              variant={action.variant}
+              isSelected={currentTab === action.variant}
+              onClick={() => changeToNextTab(action.variant)}
+            />
           </div>
         ))}
       </div>

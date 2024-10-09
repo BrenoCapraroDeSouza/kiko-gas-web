@@ -1,22 +1,36 @@
-import { Header, TabButton } from '@/components';
+import { useMemo } from 'react';
+
+import { HeaderActionProps } from '@/@types';
+import { EmptyList, Header } from '@/components';
 
 export function Dashboard() {
+  const actions = useMemo<HeaderActionProps[]>(
+    () => [
+      {
+        key: 'clients',
+        variant: 'clients',
+      },
+      {
+        key: 'cylinders',
+        variant: 'cylinders',
+      },
+      {
+        key: 'historic',
+        variant: 'historic',
+      },
+      {
+        key: 'requests',
+        variant: 'requests',
+      },
+    ],
+    [],
+  );
+
   return (
-    <Header
-      actions={[
-        {
-          button: <TabButton key='Meus Clientes' variant='clients' />,
-        },
-        {
-          button: <TabButton key='Meus Botijões' variant='cylinders' />,
-        },
-        {
-          button: <TabButton key='Histórico' variant='historic' />,
-        },
-        {
-          button: <TabButton key='Solicitações' variant='requests' />,
-        },
-      ]}
-    />
+    <main className='flex flex-col w-full h-screen'>
+      <Header actions={actions} />
+
+      <EmptyList />
+    </main>
   );
 }

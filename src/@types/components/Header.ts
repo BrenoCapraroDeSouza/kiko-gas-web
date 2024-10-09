@@ -1,5 +1,8 @@
+import { TabButtonVariant } from './TabButton';
+
 export type HeaderActionProps = {
-  button: React.JSX.Element;
+  key: React.Key;
+  variant: TabButtonVariant;
 };
 
 export interface HeaderProps {
