@@ -12,7 +12,7 @@ export function useLogin() {
     const { data } = await api.post<LoginResponseDTOProps>('/login', user);
 
     Storage.setItem('token', JSON.stringify(data.token));
-    Storage.setItem('token', JSON.stringify(data.name));
+    Storage.setItem('name', JSON.stringify(data.name));
   }
 
   const { isLoading: isLoginLoading, mutateAsync: login } = useMutation<
