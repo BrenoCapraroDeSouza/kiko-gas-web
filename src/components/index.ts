@@ -1,5 +1,6 @@
 import AddButton from './AddButton';
 import Button from './Button';
+import Chip from './Chip';
 import ClientCard from './ClientCard';
 import EmptyList from './EmptyList';
 import Header from './Header';
@@ -16,6 +17,7 @@ import Toast from './Toast';
 export {
   AddButton,
   Button,
+  Chip,
   ClientCard,
   EmptyList,
   Header,
