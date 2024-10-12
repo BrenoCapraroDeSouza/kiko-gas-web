@@ -2,25 +2,8 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { HeaderActionProps } from '@/@types';
-import { AddButton, ClientCard, EmptyList, Header, List } from '@/components';
+import { AddButton, EmptyList, Header } from '@/components';
 import { useDashboard } from '@/hooks';
-
-const CLIENTS = [
-  {
-    id: '1',
-    name: 'Daniel Sansão Araldi',
-    cpfcnpj: '347.263.990-39',
-    email: 'danielsaraldi@gmail.com',
-    phone: '(47) 9 9650-7698',
-  },
-  {
-    id: '2',
-    name: 'Nilson Andrade Neto',
-    cpfcnpj: '49.296.492/0001-01',
-    email: 'nilsonaneto@gmail.com',
-    phone: '(47) 9 9646-1843',
-  },
-];
 
 export function Dashboard() {
   const { currentTab } = useDashboard();
@@ -60,15 +43,7 @@ export function Dashboard() {
     <main className='flex flex-col w-full h-screen'>
       <Header actions={actions} />
 
-      {CLIENTS.length ? (
-        <List>
-          {CLIENTS.map(client => (
-            <ClientCard key={client.id} {...client} />
-          ))}
-        </List>
-      ) : (
-        <EmptyList />
-      )}
+      <EmptyList />
 
       {shouldShowAddButton && (
         <AddButton

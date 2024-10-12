@@ -1,15 +1,32 @@
 import { memo } from 'react';
 
-import { ClientCardProps } from '@/@types';
-
 import { Icon, IntuitiveButton, Text } from '..';
 
-function ClientCard(props: ClientCardProps) {
-  const { id, name, cpfcnpj, email, phone, isDisabled = false } = props;
+export interface CylinderCardProps {
+  id: string;
+  cylinderName: string;
+  cylinderDescription: string;
+  price: string;
+  isDefaultPrice: boolean;
+  isDisabled?: boolean;
+}
+
+function CylinderCard(props: CylinderCardProps) {
+  const {
+    id,
+    cylinderName,
+    cylinderDescription,
+    price,
+    isDefaultPrice,
+    isDisabled = false,
+  } = props;
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
+  const priceLabel = isDefaultPrice ? '(Preço Padrão)' : '(Preço Alterado)';
 
-  function onInfo(): void {}
+  function onEdit(): void {
+    console.log(id);
+  }
 
   function onDelete(): void {
     console.log(id);
@@ -25,32 +42,26 @@ function ClientCard(props: ClientCardProps) {
           <Icon variant='user' size='small' />
 
           <Text size='alternative' weight='semibold'>
-            {name} - {cpfcnpj}
+            {cylinderName} - {cylinderDescription}
           </Text>
         </div>
 
         <div className='flex items-center gap-1'>
-          <Icon variant='at' size='small' color='secondary70' />
-
-          <Text weight='medium' color='secondary70'>
-            {email}
+          <Text weight='semibold' color='primary'>
+            R$ {price}
           </Text>
-        </div>
-
-        <div className='flex items-center gap-1'>
-          <Icon variant='phone' size='small' color='secondary70' />
 
           <Text weight='medium' color='secondary70'>
-            {phone}
+            {priceLabel}
           </Text>
         </div>
       </div>
 
       <div className='flex h-full items-center gap-7'>
         <IntuitiveButton
-          variant='info'
+          variant='edit'
           isDisabled={isDisabled}
-          onClick={onInfo}
+          onClick={onEdit}
         />
 
         <IntuitiveButton
@@ -63,4 +74,4 @@ function ClientCard(props: ClientCardProps) {
   );
 }
 
-export default memo(ClientCard);
+export default memo(CylinderCard);

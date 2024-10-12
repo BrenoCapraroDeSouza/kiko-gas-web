@@ -2,6 +2,7 @@ import AddButton from './AddButton';
 import Button from './Button';
 import Chip from './Chip';
 import ClientCard from './ClientCard';
+import CylinderCard from './CylinderCard';
 import EmptyList from './EmptyList';
 import Header from './Header';
 import Icon from './Icon';
@@ -19,6 +20,7 @@ export {
   Button,
   Chip,
   ClientCard,
+  CylinderCard,
   EmptyList,
   Header,
   Icon,
