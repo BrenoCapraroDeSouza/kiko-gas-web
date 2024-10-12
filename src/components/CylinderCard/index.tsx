@@ -32,7 +32,7 @@ function CylinderCard(props: CylinderCardProps) {
     >
       <div className='flex flex-col h-full justify-center gap-2'>
         <div className='flex items-center gap-1'>
-          <Icon variant='user' size='small' />
+          <Icon variant='cylinder' size='small' />
 
           <Text size='alternative' weight='semibold'>
             {cylinderName} - {cylinderDescription}
