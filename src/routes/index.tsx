@@ -3,7 +3,13 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from '@/components';
 import { DashboardProvider } from '@/contexts';
 import { useAuth } from '@/hooks';
-import { Dashboard, Login, NotFound, RegisterClient } from '@/pages';
+import {
+  Dashboard,
+  Login,
+  NotFound,
+  RegisterClient,
+  RegisterCylinder,
+} from '@/pages';
 
 export function Router() {
   const { isAuthenticated } = useAuth();
@@ -20,6 +26,7 @@ export function Router() {
             errorElement={<NotFound />}
             ErrorBoundary={NotFound}
           />
+
           <Route
             path='/login'
             element={
@@ -30,6 +37,7 @@ export function Router() {
             errorElement={<NotFound />}
             ErrorBoundary={NotFound}
           />
+
           <Route
             path='/dashboard'
             element={
@@ -40,6 +48,7 @@ export function Router() {
             errorElement={<NotFound />}
             ErrorBoundary={NotFound}
           />
+
           <Route
             path='/register/client'
             element={
@@ -50,6 +59,18 @@ export function Router() {
             errorElement={<NotFound />}
             ErrorBoundary={NotFound}
           />
+
+          <Route
+            path='/register/cylinder'
+            element={
+              <ProtectedRoute variant='private'>
+                <RegisterCylinder />
+              </ProtectedRoute>
+            }
+            errorElement={<NotFound />}
+            ErrorBoundary={NotFound}
+          />
+
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
