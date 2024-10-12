@@ -1,15 +1,8 @@
 import { memo } from 'react';
 
-import { Icon, IntuitiveButton, Text } from '..';
+import { CylinderCardProps } from '@/@types';
 
-export interface CylinderCardProps {
-  id: string;
-  cylinderName: string;
-  cylinderDescription: string;
-  price: string;
-  isDefaultPrice: boolean;
-  isDisabled?: boolean;
-}
+import { Icon, IntuitiveButton, Text } from '..';
 
 function CylinderCard(props: CylinderCardProps) {
   const {

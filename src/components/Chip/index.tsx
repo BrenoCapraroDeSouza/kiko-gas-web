@@ -1,28 +1,28 @@
 import { memo } from 'react';
 
+import { ChipProps, ChipVariant } from '@/@types';
+
 import { Text } from '..';
-
-export type ChipVariant = 'accepted' | 'refused';
-
-export interface ChipProps {
-  variant: ChipVariant;
-}
 
 function Chip(props: ChipProps) {
   const { variant } = props;
 
-  const isAccepted = variant === 'accepted';
-  const borderColor = isAccepted ? 'border-secondary' : 'border-primary';
+  const shouldCollect = variant === 'refused' || variant === 'collection';
+  const borderColor = shouldCollect ? 'border-primary' : 'border-secondary';
+
   const labels: Record<ChipVariant, string> = {
     accepted: 'Aceito',
     refused: 'Recusado',
+    collection: 'Recolhimento',
+    replenishment: 'Reabastecimento',
+    request: 'Pedido',
   };
 
   return (
     <div
-      className={`flex px-3 py-1 bg-content border ${borderColor} rounded-2xl`}
+      className={`w-max px-3 py-1 bg-content border ${borderColor} rounded-2xl`}
     >
-      <Text size='small' color={isAccepted ? 'secondary' : 'primary'}>
+      <Text size='small' color={shouldCollect ? 'primary' : 'secondary'}>
         {labels[variant]}
       </Text>
     </div>
