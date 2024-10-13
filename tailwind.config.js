@@ -29,10 +29,15 @@ export default {
       },
 
       width: {
+        25: '6.25rem',
         128: '32rem',
         189: '47.25rem',
       },
+
+      maxHeight: {
+        148: '37rem',
+      },
     },
   },
-  plugins: [require('tailwind-scrollbar')],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true })],
 };

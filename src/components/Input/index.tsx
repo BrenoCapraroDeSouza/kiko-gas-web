@@ -98,6 +98,10 @@ function Input(props: InputProps) {
     if (onChangeText) onChangeText('');
   }, [isCPF]);
 
+  useEffect(() => {
+    setInputValue(inputValue);
+  }, [inputValue]);
+
   return (
     <div
       className={`flex ${width} h-15 px-4 py-2 items-center border-solid border-secondary70 border ${cursor} rounded overflow-hidden`}

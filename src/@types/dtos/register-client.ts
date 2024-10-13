@@ -1,7 +1,6 @@
-export interface GasCylidersDTOProps {
+export interface GasCylindersDTOProps {
   id: string;
   name: string;
-  description: string;
   price: string;
 }
 
@@ -12,7 +11,7 @@ export interface RegisterClientDTOProps {
   phone: string;
   password: string;
   confirmPassword: string;
-  gasCylinders: GasCylidersDTOProps[];
+  gasCylinders: GasCylindersDTOProps[];
 }
 
 export type RegistrationClientDTOProps = Omit<
@@ -26,5 +25,7 @@ export type FinancialClientDTOProps = Pick<
   RegisterClientDTOProps,
   'gasCylinders'
 > & {
-  onFinish: (data: Pick<RegisterClientDTOProps, 'gasCylinders'>) => void;
+  defaultCylinders: GasCylindersDTOProps[];
+  onPreviousStep: (data: GasCylindersDTOProps[]) => void;
+  onFinish: (data: GasCylindersDTOProps[]) => void;
 };

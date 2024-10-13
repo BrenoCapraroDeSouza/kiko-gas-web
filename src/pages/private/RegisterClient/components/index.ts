@@ -1,3 +1,4 @@
+import FinancialData from './FinancialData';
 import RegistrationData from './RegistrationData';
 
-export { RegistrationData };
+export { FinancialData, RegistrationData };

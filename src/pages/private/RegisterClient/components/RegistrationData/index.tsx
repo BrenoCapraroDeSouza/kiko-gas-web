@@ -1,4 +1,4 @@
-import { FormEvent, memo, useState } from 'react';
+import { FormEvent, memo, useEffect, useState } from 'react';
 
 import { RegistrationClientDTOProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
@@ -10,11 +10,8 @@ function RegistrationData(props: RegistrationClientDTOProps) {
 
   const [showToast] = useToaster();
 
-  const [registration, setRegistration] = useState<
-    Omit<RegistrationClientDTOProps, 'onNextStep'>
-  >({
-    ...rest,
-  });
+  const [registration, setRegistration] =
+    useState<Omit<RegistrationClientDTOProps, 'onNextStep'>>(rest);
 
   function handlePasswordQuality(): boolean {
     if (registration.password.length < 6) {
@@ -53,10 +50,14 @@ function RegistrationData(props: RegistrationClientDTOProps) {
     !isValidPhone ||
     !isValidDocument;
 
+  useEffect(() => {
+    setRegistration(registration);
+  }, [registration]);
+
   return (
     <div className='w-189 h-auto px-14 py-10 bg-content rounded-2xl'>
       <Text size='alternative' weight='semibold' className='text-center mb-7'>
-        Complete os campos abaixo para criar uma conta para <br />o seu cliente.
+        Complete os campos abaixo para criar uma conta para o seu cliente.
       </Text>
 
       <Text weight='semibold' className='text-center mb-5'>
