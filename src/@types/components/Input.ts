@@ -4,7 +4,8 @@ export type InputType =
   | 'tel'
   | 'text'
   | 'document'
-  | 'currency';
+  | 'currency'
+  | 'weight';
 
 export interface InputProps {
   value?: string;

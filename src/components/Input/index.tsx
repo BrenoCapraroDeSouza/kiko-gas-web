@@ -90,6 +90,22 @@ function Input(props: InputProps) {
         {...commonInputProps}
       />
     ),
+    weight: (
+      <NumericFormat
+        thousandsGroupStyle='thousand'
+        thousandSeparator='.'
+        decimalSeparator=','
+        suffix=' Kg'
+        decimalScale={2}
+        allowLeadingZeros
+        allowNegative={false}
+        maxLength={9}
+        minLength={0}
+        max={999}
+        min={0}
+        {...commonInputProps}
+      />
+    ),
   };
 
   useEffect(() => {
