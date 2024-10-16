@@ -1,17 +1,22 @@
 import { FormEvent, memo, useState } from 'react';
 import { NumericFormat } from 'react-number-format';
 
-import { FinancialClientDTOProps, GasCylindersDTOProps } from '@/@types';
+import { CylinderDTO, FinancialClientDTOProps } from '@/@types';
 import { Button, Icon, Text } from '@/components';
+import { currencyToNumber, formatCurrency } from '@/helpers';
 
 function FinancialData(props: FinancialClientDTOProps) {
-  const { gasCylinders, defaultCylinders, onFinish, onPreviousStep } = props;
+  const {
+    isLoading,
+    gasCylinders,
+    defaultCylinders,
+    onFinish,
+    onPreviousStep,
+  } = props;
 
-  const [financial, setFinancial] = useState<GasCylindersDTOProps[]>(
-    gasCylinders || [],
-  );
+  const [financial, setFinancial] = useState<CylinderDTO[]>(gasCylinders || []);
 
-  function handleChangeCylinderPrice(gasCylinder: GasCylindersDTOProps): void {
+  function handleChangeCylinderPrice(gasCylinder: CylinderDTO): void {
     const allCylindersWithNewPrices = financial.map(cylinder =>
       cylinder.id !== gasCylinder.id ? cylinder : gasCylinder,
     );
@@ -23,15 +28,15 @@ function FinancialData(props: FinancialClientDTOProps) {
     onPreviousStep(financial);
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>): void {
+  async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    onFinish(financial);
+    await onFinish(financial);
   }
 
   const hasCylinders = !!financial.length;
   const allPricesDefinedCorrectly = financial.every(
-    cylinder => !!cylinder.price.trim(),
+    cylinder => !!cylinder.price.toString().trim(),
   );
 
   return (
@@ -64,6 +69,7 @@ function FinancialData(props: FinancialClientDTOProps) {
 
           {financial.map((cylinder, index) => {
             const isChanged = cylinder.price !== defaultCylinders[index].price;
+            const priceFormatted = formatCurrency(cylinder.price);
 
             return (
               <div
@@ -80,7 +86,7 @@ function FinancialData(props: FinancialClientDTOProps) {
 
                 <div className='flex h-full items-center gap-6'>
                   <NumericFormat
-                    value={cylinder.price}
+                    value={priceFormatted}
                     className='w-25 font-poppins font-semibold text-base text-right text-primary cursor-pointer rounded bg-transparent outline-none placeholder:text-primary50'
                     thousandsGroupStyle='thousand'
                     thousandSeparator='.'
@@ -93,11 +99,12 @@ function FinancialData(props: FinancialClientDTOProps) {
                     minLength={0}
                     max={9999}
                     min={0}
+                    disabled={isLoading}
                     required
                     onChange={event =>
                       handleChangeCylinderPrice({
                         ...cylinder,
-                        price: event.target.value,
+                        price: currencyToNumber(event.target.value),
                       })
                     }
                   />
@@ -105,7 +112,7 @@ function FinancialData(props: FinancialClientDTOProps) {
                   <button
                     type='button'
                     title='Voltar ao preço original'
-                    disabled={!isChanged}
+                    disabled={!isChanged || isLoading}
                     className='cursor-pointer rounded hover:opacity-90 disabled:hover:opacity-100 disabled:cursor-not-allowed transition-colors duration-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-primary'
                     onClick={() =>
                       handleChangeCylinderPrice({
@@ -130,6 +137,7 @@ function FinancialData(props: FinancialClientDTOProps) {
             <Button
               title='Voltar'
               isHugWidth
+              isDisabled={isLoading}
               onClick={handleGoBackToPreviousStep}
             />
           </div>
@@ -138,7 +146,10 @@ function FinancialData(props: FinancialClientDTOProps) {
             <Button
               type='submit'
               title='Finalizar'
-              isDisabled={!allPricesDefinedCorrectly || !hasCylinders}
+              isLoading={isLoading}
+              isDisabled={
+                !allPricesDefinedCorrectly || !hasCylinders || isLoading
+              }
               isHugWidth
             />
           </div>

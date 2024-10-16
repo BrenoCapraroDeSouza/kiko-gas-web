@@ -10,12 +10,10 @@ function CylinderCard(props: CylinderCardProps) {
     cylinderName,
     cylinderDescription,
     price,
-    isDefaultPrice,
     isDisabled = false,
   } = props;
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
-  const priceLabel = isDefaultPrice ? '(Preço Padrão)' : '(Preço Alterado)';
 
   function onEdit(): void {
     console.log(id);
@@ -41,11 +39,11 @@ function CylinderCard(props: CylinderCardProps) {
 
         <div className='flex items-center gap-1'>
           <Text weight='semibold' color='primary'>
-            R$ {price}
+            {price}
           </Text>
 
           <Text weight='medium' color='secondary70'>
-            {priceLabel}
+            (Preço Padrão)
           </Text>
         </div>
       </div>

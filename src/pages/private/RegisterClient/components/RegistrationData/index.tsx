@@ -70,6 +70,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.name}
             type='text'
             placeholder='Nome'
+            isRequired
             onChangeText={name => setRegistration({ ...registration, name })}
           />
 
@@ -77,6 +78,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.email}
             type='email'
             placeholder='E-mail'
+            isRequired
             onChangeText={email => setRegistration({ ...registration, email })}
           />
 
@@ -84,6 +86,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.cpfcnpj}
             type='document'
             placeholder='CPF/CNPJ'
+            isRequired
             onChangeText={cpfcnpj =>
               setRegistration({ ...registration, cpfcnpj })
             }
@@ -93,6 +96,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.phone}
             type='tel'
             placeholder='Telefone'
+            isRequired
             onChangeText={phone => setRegistration({ ...registration, phone })}
           />
 
@@ -100,6 +104,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.password}
             type='password'
             placeholder='Senha'
+            isRequired
             onChangeText={password =>
               setRegistration({ ...registration, password })
             }
@@ -109,6 +114,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.confirmPassword}
             type='password'
             placeholder='Confirmar Senha'
+            isRequired
             onChangeText={confirmPassword =>
               setRegistration({ ...registration, confirmPassword })
             }

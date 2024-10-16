@@ -18,7 +18,7 @@ function Header(props: HeaderProps) {
   });
 
   return (
-    <header className='flex flex-col w-full h-64 p-10 pt-8 bg-content border-b border-b-secondary'>
+    <header className='flex flex-col w-full min-h-64 p-10 pt-8 bg-content border-b border-b-secondary'>
       <div className='flex w-full justify-between items-start gap-10'>
         <button
           className='flex items-center gap-1 rounded hover:opacity-90 transition-colors duration-300 focus-visible:outline-none focus-visible:ring focus-visible:ring-secondary'

@@ -3,6 +3,5 @@ export interface CylinderCardProps {
   cylinderName: string;
   cylinderDescription: string;
   price: string;
-  isDefaultPrice: boolean;
   isDisabled?: boolean;
 }

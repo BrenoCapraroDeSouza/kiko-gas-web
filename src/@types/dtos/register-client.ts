@@ -1,8 +1,4 @@
-export interface GasCylindersDTOProps {
-  id: string;
-  name: string;
-  price: string;
-}
+import { CylinderDTO } from '../services';
 
 export interface RegisterClientDTOProps {
   name: string;
@@ -11,7 +7,7 @@ export interface RegisterClientDTOProps {
   phone: string;
   password: string;
   confirmPassword: string;
-  gasCylinders: GasCylindersDTOProps[];
+  gasCylinders: CylinderDTO[];
 }
 
 export type RegistrationClientDTOProps = Omit<
@@ -25,7 +21,8 @@ export type FinancialClientDTOProps = Pick<
   RegisterClientDTOProps,
   'gasCylinders'
 > & {
-  defaultCylinders: GasCylindersDTOProps[];
-  onPreviousStep: (data: GasCylindersDTOProps[]) => void;
-  onFinish: (data: GasCylindersDTOProps[]) => void;
+  isLoading: boolean;
+  defaultCylinders: CylinderDTO[];
+  onPreviousStep: (data: CylinderDTO[]) => void;
+  onFinish: (data: CylinderDTO[]) => Promise<void>;
 };

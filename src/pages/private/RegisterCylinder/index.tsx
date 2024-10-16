@@ -1,9 +1,11 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RegisterCylinderDTOProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
-import { useToaster } from '@/hooks';
+import { currencyToNumber } from '@/helpers';
+import { useCreateCylinder, useDashboard, useToaster } from '@/hooks';
+import { removeKgSuffix } from '@/utils';
 
 export function RegisterCylinder() {
   const [registration, setRegistration] = useState<RegisterCylinderDTOProps>(
@@ -12,13 +14,25 @@ export function RegisterCylinder() {
 
   const navigate = useNavigate();
   const [showToast] = useToaster();
+  const { changeToNextTab } = useDashboard();
+  const {
+    isCreateCylinderError,
+    isCreatingCylinder,
+    setIsCreateCylinderError,
+    createCylinder,
+  } = useCreateCylinder();
 
-  function onSubmit(event: FormEvent<HTMLFormElement>): void {
+  async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    showToast('Gás adicionado!', 'Seu novo gás foi adicionado com sucesso!');
+    const isCreated = await createCylinder(registration);
 
-    navigate('/dashboard', { replace: true });
+    if (isCreated) {
+      changeToNextTab('cylinders');
+      showToast('Gás adicionado!', 'Seu novo gás foi adicionado com sucesso!');
+
+      navigate('/dashboard', { replace: true });
+    }
   }
 
   const isDisabled =
@@ -26,6 +40,17 @@ export function RegisterCylinder() {
     !registration.price ||
     !registration.weight ||
     !registration.description;
+
+  useEffect(() => {
+    if (isCreateCylinderError) {
+      setIsCreateCylinderError(false);
+
+      showToast(
+        'Ops! Parece que algo não deu certo',
+        'Verifique os dados e tente novamente.',
+      );
+    }
+  }, [isCreateCylinderError, setIsCreateCylinderError, showToast]);
 
   return (
     <main className='flex flex-col w-full h-screen items-center justify-center p-4 bg-background'>
@@ -42,11 +67,15 @@ export function RegisterCylinder() {
           <div className='flex flex-col mb-5 gap-5'>
             <Input
               placeholder='Nome'
+              isDisabled={isCreatingCylinder}
+              isRequired
               onChangeText={name => setRegistration({ ...registration, name })}
             />
 
             <Input
               placeholder='Descrição'
+              isDisabled={isCreatingCylinder}
+              isRequired
               onChangeText={description =>
                 setRegistration({ ...registration, description })
               }
@@ -55,16 +84,26 @@ export function RegisterCylinder() {
             <Input
               type='currency'
               placeholder='Preço'
+              isDisabled={isCreatingCylinder}
+              isRequired
               onChangeText={price =>
-                setRegistration({ ...registration, price })
+                setRegistration({
+                  ...registration,
+                  price: currencyToNumber(price),
+                })
               }
             />
 
             <Input
               type='weight'
               placeholder='Peso'
+              isDisabled={isCreatingCylinder}
+              isRequired
               onChangeText={weight =>
-                setRegistration({ ...registration, weight })
+                setRegistration({
+                  ...registration,
+                  weight: currencyToNumber(removeKgSuffix(weight)),
+                })
               }
             />
           </div>
@@ -73,7 +112,8 @@ export function RegisterCylinder() {
             <Button
               type='submit'
               title='Adicionar'
-              isDisabled={isDisabled}
+              isLoading={isCreatingCylinder}
+              isDisabled={isDisabled || isCreatingCylinder}
               isHugWidth
             />
           </div>

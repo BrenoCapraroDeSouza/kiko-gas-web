@@ -1,60 +1,72 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  GasCylindersDTOProps,
+  CylinderDTO,
   RegisterClientDTOProps,
   RegisterClientStep,
 } from '@/@types';
-import { useToaster } from '@/hooks';
+import { useCreateClient, useGetCylinders, useToaster } from '@/hooks';
 
 import { FinancialData, RegistrationData } from './components';
-
-const DEFAULT_CYLINDER = [
-  {
-    id: '1',
-    name: 'P5',
-    price: 'R$ 71,90',
-  },
-];
 
 export function RegisterClient() {
   const [currentStep, setCurrentStep] =
     useState<RegisterClientStep>('registration');
-  const [defaultCylinders, setDefaultCylinders] =
-    useState<GasCylindersDTOProps[]>(DEFAULT_CYLINDER);
-  const [newClient, setNewClient] = useState<RegisterClientDTOProps>({
-    gasCylinders: DEFAULT_CYLINDER,
-  } as RegisterClientDTOProps);
+  const [newClient, setNewClient] = useState<RegisterClientDTOProps>(
+    {} as RegisterClientDTOProps,
+  );
 
   const navigate = useNavigate();
   const [showToast] = useToaster();
+  const { cylinders } = useGetCylinders();
+  const {
+    isCreateClientError,
+    isCreatingClient,
+    createClient,
+    setIsCreateClientError,
+  } = useCreateClient();
 
   function goToFinancialStep(
     data: Omit<RegisterClientDTOProps, 'gasCylinders'>,
   ): void {
-    setDefaultCylinders(DEFAULT_CYLINDER);
     setNewClient({ ...newClient, ...data });
     setCurrentStep('financial');
   }
 
-  function goBackRegistrationStep(data: GasCylindersDTOProps[]): void {
-    setDefaultCylinders(DEFAULT_CYLINDER);
+  function goBackRegistrationStep(data: CylinderDTO[]): void {
     setNewClient({ ...newClient, gasCylinders: [...data] });
     setCurrentStep('registration');
   }
 
-  function handleFinishRegistration(data: GasCylindersDTOProps[]): void {
-    setDefaultCylinders(DEFAULT_CYLINDER);
+  async function handleFinishRegistration(data: CylinderDTO[]): Promise<void> {
     setNewClient({ ...newClient, gasCylinders: [...data] });
 
-    showToast(
-      'Cliente cadastrado!',
-      'Seu novo cliente foi cadastrado com sucesso!',
-    );
+    const isCreated = await createClient({
+      ...newClient,
+      gasCylinders: [...data],
+    });
 
-    navigate('/dashboard', { replace: true });
+    if (isCreated) {
+      showToast(
+        'Cliente cadastrado!',
+        'Seu novo cliente foi cadastrado com sucesso!',
+      );
+
+      navigate('/dashboard', { replace: true });
+    }
   }
+
+  useEffect(() => {
+    if (isCreateClientError) {
+      setIsCreateClientError(false);
+
+      showToast(
+        'Ops! Parece que algo não deu certo',
+        'Verifique os dados e tente novamente.',
+      );
+    }
+  }, [isCreateClientError, setIsCreateClientError, showToast]);
 
   return (
     <main className='flex w-full h-screen items-center justify-center p-4 bg-background'>
@@ -64,8 +76,9 @@ export function RegisterClient() {
         <FinancialData
           onPreviousStep={goBackRegistrationStep}
           onFinish={handleFinishRegistration}
-          gasCylinders={newClient.gasCylinders}
-          defaultCylinders={defaultCylinders}
+          gasCylinders={cylinders}
+          defaultCylinders={cylinders}
+          isLoading={isCreatingClient}
         />
       )}
     </main>
