@@ -15,7 +15,6 @@ export function useGetCylinders() {
       params: {
         page: 1,
         pageSize: 100,
-        orderBy: 'asc',
       },
     });
 

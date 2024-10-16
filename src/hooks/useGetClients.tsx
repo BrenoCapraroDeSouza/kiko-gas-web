@@ -15,7 +15,7 @@ export function useGetClients() {
       params: {
         page: 1,
         pageSize: 100,
-        orderBy: 'asc',
+        orderBy: 'desc',
       },
     });
 
