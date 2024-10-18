@@ -9,6 +9,7 @@ export * from './Input';
 export * from './IntuitiveButton';
 export * from './List';
 export * from './ProtectedRoute';
+export * from './SignalCard';
 export * from './SignalStatus';
 export * from './Spinner';
 export * from './TabButton';

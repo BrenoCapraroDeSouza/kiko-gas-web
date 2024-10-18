@@ -1,14 +1,15 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { HeaderActionProps } from '@/@types';
+import { HeaderActionProps, SignalCardProps } from '@/@types';
 import {
   AddButton,
   ClientCard,
   CylinderCard,
-  EmptyList,
+  // EmptyList,
   Header,
   List,
+  SignalCard,
   Spinner,
 } from '@/components';
 import { formatCurrency } from '@/helpers';
@@ -18,10 +19,113 @@ export function Dashboard() {
   const { currentTab } = useDashboard();
   const { clients, isClientLoading, refreshClients } = useGetClients();
   const { cylinders, isCylindersLoading, refreshCylinders } = useGetCylinders();
+  const requests: SignalCardProps[] = [
+    {
+      id: '01',
+      type: 'collection',
+      client: {
+        id: 'testCliente',
+        name: 'João da Silva',
+        cpfcnpj: '123.456.789-00',
+        address: 'Rua das Flores, 123',
+        phone: '(11) 1234-5678',
+        cylinder: {
+          id: 'testCilindro',
+          name: 'P13',
+          description: 'Residencial',
+          price: 140,
+          paymentType: 'money',
+          exchange: null,
+        },
+      },
+      createdAt: new Date(),
+    },
+    {
+      id: '02',
+      type: 'request',
+      client: {
+        id: 'testCliente',
+        name: 'Gabriel da Silva',
+        cpfcnpj: '333.456.789-00',
+        address: 'Rua das Aguas, 122',
+        phone: '(11) 3334-5678',
+        cylinder: {
+          id: 'testCilindro',
+          name: 'P20',
+          description: 'Industrial',
+          price: 140,
+          paymentType: 'money',
+          exchange: null,
+        },
+      },
+      createdAt: new Date(),
+    },
+    {
+      id: '03',
+      type: 'replenishment',
+      client: {
+        id: 'testCliente',
+        name: 'Antonio da Silva',
+        cpfcnpj: '321.456.789-00',
+        address: 'Rua das Arvores, 123',
+        phone: '(11) 1234-5678',
+        cylinder: {
+          id: 'testCilindro',
+          name: 'P13',
+          description: 'Residencial',
+          price: 140,
+          paymentType: 'money',
+          exchange: null,
+        },
+      },
+      createdAt: new Date(),
+    },
+    {
+      id: '04',
+      type: 'collection',
+      client: {
+        id: 'testCliente',
+        name: 'João da Silva',
+        cpfcnpj: '123.456.789-00',
+        address: 'Rua das Flores, 123',
+        phone: '(11) 1234-5678',
+        cylinder: {
+          id: 'testCilindro',
+          name: 'P13',
+          description: 'Residencial',
+          price: 140,
+          paymentType: 'money',
+          exchange: null,
+        },
+      },
+      createdAt: new Date(),
+    },
+    {
+      id: '05',
+      type: 'replenishment',
+      client: {
+        id: 'testCliente',
+        name: 'João da Silva',
+        cpfcnpj: '123.456.789-00',
+        address: 'Rua das Flores, 123',
+        phone: '(11) 1234-5678',
+        cylinder: {
+          id: 'testCilindro',
+          name: 'P13',
+          description: 'Residencial',
+          price: 140,
+          paymentType: 'money',
+          exchange: null,
+        },
+      },
+      createdAt: new Date(),
+    },
+  ];
   const navigate = useNavigate();
 
   const isClientTab = currentTab === 'clients';
   const isCylinderTab = currentTab === 'cylinders';
+  const isRequestTab = currentTab === 'requests';
   const shouldShowAddButton = isClientTab || currentTab === 'cylinders';
   const hasItems = clients.length || cylinders.length;
   const hasList = isClientTab || isCylinderTab;
@@ -104,7 +208,18 @@ export function Dashboard() {
               <Spinner />
             </div>
           ) : (
-            <EmptyList />
+            <List>
+              {isRequestTab &&
+                requests.map(item => (
+                  <SignalCard
+                    key={item.id}
+                    id={item.id}
+                    type={item.type}
+                    client={item.client}
+                    createdAt={item.createdAt}
+                  />
+                ))}
+            </List>
           )}
         </>
       )}

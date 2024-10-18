@@ -2,6 +2,7 @@ import {
   ArrowsCounterClockwise,
   At,
   Backspace,
+  CalendarDots,
   Cylinder,
   Eye,
   EyeSlash,
@@ -62,6 +63,7 @@ function Icon(props: IconProps) {
     backspace: <Backspace {...commonIconProps} />,
     hand: <Hand {...commonIconProps} />,
     money: <Money {...commonIconProps} />,
+    'calendar-dots': <CalendarDots {...commonIconProps} />,
   };
 
   return icons[variant];
