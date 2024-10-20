@@ -5,6 +5,7 @@ import ClientCard from './ClientCard';
 import CylinderCard from './CylinderCard';
 import EmptyList from './EmptyList';
 import Header from './Header';
+import HistoricCard from './HistoricCard';
 import Icon from './Icon';
 import Input from './Input';
 import IntuitiveButton from './IntuitiveButton';
@@ -25,6 +26,7 @@ export {
   CylinderCard,
   EmptyList,
   Header,
+  HistoricCard,
   Icon,
   Input,
   IntuitiveButton,

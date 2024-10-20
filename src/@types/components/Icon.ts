@@ -21,7 +21,9 @@ export type IconVariant =
   | 'map-pin-simple'
   | 'money'
   | 'pix-logo'
-  | 'calendar-dots';
+  | 'calendar-dots'
+  | 'calendar-check'
+  | 'calendar-x';
 
 export type IconSize = 'default' | 'small' | 'large' | 'giant';
 

@@ -4,6 +4,7 @@ export * from './Chip';
 export * from './ClientCard';
 export * from './CylinderCard';
 export * from './Header';
+export * from './HistoricCard';
 export * from './Icon';
 export * from './Input';
 export * from './IntuitiveButton';
