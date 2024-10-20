@@ -49,6 +49,7 @@ function Icon(props: IconProps) {
     'user-plus': <UserPlus {...commonIconProps} />,
     'map-pin-simple': <MapPinSimple {...commonIconProps} />,
     'pix-logo': <PixLogo {...commonIconProps} />,
+    'calendar-dots': <CalendarDots {...commonIconProps} />,
     eye: <Eye {...commonIconProps} />,
     pencil: <Pencil {...commonIconProps} />,
     trash: <Trash {...commonIconProps} />,
@@ -63,7 +64,6 @@ function Icon(props: IconProps) {
     backspace: <Backspace {...commonIconProps} />,
     hand: <Hand {...commonIconProps} />,
     money: <Money {...commonIconProps} />,
-    'calendar-dots': <CalendarDots {...commonIconProps} />,
   };
 
   return icons[variant];

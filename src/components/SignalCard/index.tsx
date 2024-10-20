@@ -2,34 +2,43 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { memo } from 'react';
 
-import { SignalCardProps } from '@/@types';
+import { IconVariant, SignalCardProps, SignalPaymentType } from '@/@types';
 import { formatCurrency } from '@/helpers';
 
 import { Button, Chip, Icon, Text } from '..';
 
 function SignalCard(props: SignalCardProps) {
-  const { id, type, client, isDisabled = false, createdAt } = props;
+  const { id, type, client, createdAt, isDisabled = false } = props;
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
+  const isPixPayment = client.cylinder.paymentType === 'pix';
+  const exchangeLabel = client.cylinder.exchange
+    ? `(Troco para ${formatCurrency(client.cylinder.exchange)}}`
+    : '';
 
   function onRecuse(): void {
-    console.log('Transação ' + id + ' do tipo ' + type + ' recusada');
+    console.log(id);
   }
 
   function onAccept(): void {
-    console.log('Transação ' + id + ' do tipo ' + type + ' aceita');
+    console.log(id);
   }
 
-  const formattedCurrentDate = format(createdAt, " dd/MM/yy 'às' H'h'm'm'", {
+  const formattedSignalDate = format(createdAt, "dd/MM/yy 'às' H'h'm'm'", {
     locale: ptBR,
   });
+
+  const icons: Record<SignalPaymentType, IconVariant> = {
+    money: 'money',
+    pix: 'pix-logo',
+  };
 
   return (
     <div
       aria-disabled={isDisabled}
-      className={`flex w-full h-auto min-h-32  items-center px-10 py-4 gap-7 rounded-2xl bg-content border border-secondary ${opacity}`}
+      className={`flex w-full h-auto min-h-32 items-center px-10 py-4 gap-7 rounded-2xl bg-content border border-secondary ${opacity}`}
     >
-      <div className='flex flex-col flex-1 h-full justify-center gap-2'>
+      <div className='flex flex-1 flex-col h-full justify-center gap-2'>
         <div className='flex items-center gap-3'>
           <div className='flex items-center gap-1'>
             <Icon variant='user' size='small' />
@@ -55,25 +64,19 @@ function SignalCard(props: SignalCardProps) {
             </Text>
           </div>
 
-          <div className='flex items-center gap-1'>
-            <Icon
-              variant={
-                client.cylinder.paymentType === 'pix' ? 'pix-logo' : 'money'
-              }
-              size='small'
-              color='secondary70'
-            />
+          {client.cylinder.paymentType && (
+            <div className='flex items-center gap-1'>
+              <Icon
+                variant={icons[client.cylinder.paymentType]}
+                size='small'
+                color='secondary70'
+              />
 
-            <Text size='small' weight='semibold' color='secondary70'>
-              {client.cylinder.paymentType === 'pix'
-                ? 'PIX'
-                : `Dinheiro  ${
-                    client.cylinder.exchange
-                      ? `(Troco para ${formatCurrency(client.cylinder.exchange)}}`
-                      : ''
-                  }`}
-            </Text>
-          </div>
+              <Text size='small' weight='semibold' color='secondary70'>
+                {isPixPayment ? 'PIX' : `Dinheiro ${exchangeLabel}`}
+              </Text>
+            </div>
+          )}
         </div>
 
         <div className='flex items-center gap-1'>
@@ -92,7 +95,7 @@ function SignalCard(props: SignalCardProps) {
           <div className='flex justify-between items-center gap-1'>
             <Icon size='small' variant='calendar-dots' />
 
-            <Text weight='medium'>Solicitado em {formattedCurrentDate}</Text>
+            <Text weight='medium'>Solicitado em {formattedSignalDate}</Text>
           </div>
         </div>
       </div>
@@ -102,15 +105,15 @@ function SignalCard(props: SignalCardProps) {
           title='Recusar'
           variant='secondary'
           isDisabled={isDisabled}
-          onClick={onRecuse}
           isHugWidth
+          onClick={onRecuse}
         />
 
         <Button
           title='Aceitar'
           isDisabled={isDisabled}
-          onClick={onAccept}
           isHugWidth
+          onClick={onAccept}
         />
       </div>
     </div>

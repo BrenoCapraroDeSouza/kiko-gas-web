@@ -5,13 +5,7 @@ import { CylinderCardProps } from '@/@types';
 import { Icon, IntuitiveButton, Text } from '..';
 
 function CylinderCard(props: CylinderCardProps) {
-  const {
-    id,
-    cylinderName,
-    cylinderDescription,
-    price,
-    isDisabled = false,
-  } = props;
+  const { id, name, description, price, isDisabled = false } = props;
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
 
@@ -33,7 +27,7 @@ function CylinderCard(props: CylinderCardProps) {
           <Icon variant='cylinder' size='small' />
 
           <Text size='alternative' weight='semibold'>
-            {cylinderName} - {cylinderDescription}
+            {name} - {description}
           </Text>
         </div>
 
