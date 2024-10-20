@@ -126,7 +126,7 @@ function Input(props: InputProps) {
 
       {isPassword && (
         <button
-          className={`size-6 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-90 disabled:hover:opacity-90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary focus-visible:rounded`}
+          className={`size-6 ${cursor} hover:opacity-90 transition-colors duration-300 disabled:opacity-70 disabled:hover:opacity-70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-secondary focus-visible:rounded`}
           type='button'
           onClick={handleVisibilityChange}
           disabled={isDisabled}
