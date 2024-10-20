@@ -20,7 +20,8 @@ export type IconVariant =
   | 'hand'
   | 'map-pin-simple'
   | 'money'
-  | 'pix-logo';
+  | 'pix-logo'
+  | 'calendar-dots';
 
 export type IconSize = 'default' | 'small' | 'large' | 'giant';
 
