@@ -3,12 +3,14 @@ import Button from './Button';
 import Chip from './Chip';
 import ClientCard from './ClientCard';
 import CylinderCard from './CylinderCard';
+import Dialog from './Dialog';
 import EmptyList from './EmptyList';
 import Header from './Header';
 import Icon from './Icon';
 import Input from './Input';
 import IntuitiveButton from './IntuitiveButton';
 import List from './List';
+import Modal from './Modal';
 import ProtectedRoute from './ProtectedRoute';
 import SignalStatus from './SignalStatus';
 import Spinner from './Spinner';
@@ -22,12 +24,14 @@ export {
   Chip,
   ClientCard,
   CylinderCard,
+  Dialog,
   EmptyList,
   Header,
   Icon,
   Input,
   IntuitiveButton,
   List,
+  Modal,
   ProtectedRoute,
   SignalStatus,
   Spinner,

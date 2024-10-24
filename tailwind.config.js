@@ -34,6 +34,14 @@ export default {
         189: '47.25rem',
       },
 
+      maxWidth: {
+        144: '36rem',
+      },
+
+      minWidth: {
+        128: '32rem',
+      },
+
       maxHeight: {
         148: '37rem',
       },
