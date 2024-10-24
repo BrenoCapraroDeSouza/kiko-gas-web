@@ -2,6 +2,7 @@ import AddButton from './AddButton';
 import Button from './Button';
 import Chip from './Chip';
 import ClientCard from './ClientCard';
+import CloseModalButton from './CloseModalButton';
 import CylinderCard from './CylinderCard';
 import Dialog from './Dialog';
 import EmptyList from './EmptyList';
@@ -23,6 +24,7 @@ export {
   Button,
   Chip,
   ClientCard,
+  CloseModalButton,
   CylinderCard,
   Dialog,
   EmptyList,

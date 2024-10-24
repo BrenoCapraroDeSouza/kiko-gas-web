@@ -2,6 +2,7 @@ export * from './AddButton';
 export * from './Button';
 export * from './Chip';
 export * from './ClientCard';
+export * from './CloseModalButton';
 export * from './CylinderCard';
 export * from './Dialog';
 export * from './Header';
