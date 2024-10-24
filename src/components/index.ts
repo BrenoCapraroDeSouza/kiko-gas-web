@@ -4,6 +4,7 @@ import Chip from './Chip';
 import ClientCard from './ClientCard';
 import CloseModalButton from './CloseModalButton';
 import CylinderCard from './CylinderCard';
+import CylindersModal from './CylindersModal';
 import Dialog from './Dialog';
 import EmptyList from './EmptyList';
 import Header from './Header';
@@ -26,6 +27,7 @@ export {
   ClientCard,
   CloseModalButton,
   CylinderCard,
+  CylindersModal,
   Dialog,
   EmptyList,
   Header,
