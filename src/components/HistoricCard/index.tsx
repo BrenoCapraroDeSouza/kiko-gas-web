@@ -49,9 +49,8 @@ function HistoricCard(props: HistoricCardProps) {
               {client.name} - {client.cpfcnpj}
             </Text>
           </div>
-          {(type === 'accepted' || type === 'recused') && (
-            <Chip variant={type} />
-          )}
+
+          <Chip variant={type} />
         </div>
 
         <div className='flex items-center gap-3'>

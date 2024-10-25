@@ -1,6 +1,6 @@
 export type HistoricCardStatus = 'collection' | 'replenishment' | 'request';
 
-export type HistoricCardType = 'accepted' | 'recused';
+export type HistoricCardType = 'accepted' | 'refused';
 
 export type HistoricPaymentType = 'money' | 'pix';
 
