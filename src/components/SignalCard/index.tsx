@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { IconVariant, SignalCardProps, SignalPaymentType } from '@/@types';
 import { formatCurrency } from '@/helpers';
 
-import { Button, Chip, Icon, Text } from '..';
+import { Button, Chip, Icon, Text } from '../index';
 
 function SignalCard(props: SignalCardProps) {
   const { id, type, client, createdAt, isDisabled = false } = props;
