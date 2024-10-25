@@ -6,6 +6,7 @@ export * from './CloseModalButton';
 export * from './CylinderCard';
 export * from './CylindersModal';
 export * from './Dialog';
+export * from './EditCylinderModal';
 export * from './Header';
 export * from './Icon';
 export * from './Input';

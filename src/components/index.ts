@@ -6,6 +6,7 @@ import CloseModalButton from './CloseModalButton';
 import CylinderCard from './CylinderCard';
 import CylindersModal from './CylindersModal';
 import Dialog from './Dialog';
+import EditCylinderModal from './EditCylinderModal';
 import EmptyList from './EmptyList';
 import Header from './Header';
 import Icon from './Icon';
@@ -29,6 +30,7 @@ export {
   CylinderCard,
   CylindersModal,
   Dialog,
+  EditCylinderModal,
   EmptyList,
   Header,
   Icon,
