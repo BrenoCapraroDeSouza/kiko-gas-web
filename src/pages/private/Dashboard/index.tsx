@@ -127,7 +127,7 @@ const HISTORICS: HistoricCardProps[] = [
   },
   {
     id: '2',
-    type: 'accepted',
+    type: 'recused',
     status: 'replenishment',
     client: {
       id: '1',
