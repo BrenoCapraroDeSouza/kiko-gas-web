@@ -165,6 +165,26 @@ const HISTORICS: HistoricCardProps[] = [
     },
     createdAt: new Date(),
   },
+  {
+    id: '4',
+    type: 'accepted',
+    status: 'request',
+    client: {
+      id: '1',
+      name: 'Cauã Ribas Adami Devitte',
+      cpfcnpj: '123.435.001-15',
+      address: 'Rua das Flores, 13, Ponta Grossa - PR, 88129-912',
+      cylinder: {
+        id: '8',
+        name: 'P20',
+        description: 'Comercial',
+        price: 140,
+        paymentType: 'money',
+        exchange: 150,
+      },
+    },
+    createdAt: new Date(),
+  },
 ];
 
 export function Dashboard() {

@@ -27,5 +27,4 @@ export interface HistoricCardProps {
   type: HistoricCardType;
   client: HistoricCardClientProps;
   createdAt: Date;
-  isDisabled?: boolean;
 }
