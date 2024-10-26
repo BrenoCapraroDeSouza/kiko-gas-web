@@ -10,7 +10,7 @@ import {
 import Icon from '../Icon';
 
 function IntuitiveButton(props: IntuitiveButtonProps) {
-  const { variant, isDisabled = false, onClick } = props;
+  const { variant, title, isDisabled = false, onClick } = props;
 
   const intuitiveIcons: Record<IntuitiveButtonVariant, IconVariant> = {
     info: 'info',
@@ -32,6 +32,7 @@ function IntuitiveButton(props: IntuitiveButtonProps) {
   return (
     <button
       type='button'
+      title={title}
       disabled={isDisabled}
       onClick={onClick}
       className={`flex size-10 justify-center items-center bg-content rounded cursor-pointer border ${borderColor} disabled:cursor-not-allowed disabled:hover:opacity-100 hover:opacity-90 transition-colors duration-300`}

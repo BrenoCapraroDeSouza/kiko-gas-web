@@ -1,14 +1,14 @@
 import { useQuery } from 'react-query';
 
-import { CylinderDTO } from '@/@types';
+import { CylinderResponseProps } from '@/@types';
 import { api } from '@/config';
 import { Storage } from '@/helpers';
 
 export function useGetCylinders() {
-  async function fetchQuery(): Promise<CylinderDTO[]> {
+  async function fetchQuery(): Promise<CylinderResponseProps[]> {
     const accessToken = Storage.getItem('token');
 
-    const { data } = await api.get<CylinderDTO[]>('/gas', {
+    const { data } = await api.get<CylinderResponseProps[]>('/gas', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 
-import { CylinderDTO, RegisterCylinderDTOProps } from '@/@types';
+import { CylinderResponseProps, RegisterCylinderProps } from '@/@types';
 import { api } from '@/config';
 import { Storage } from '@/helpers';
 
@@ -10,10 +10,10 @@ export function useCreateCylinder() {
     useState<boolean>(false);
 
   async function fetchMutation(
-    cylinder: RegisterCylinderDTOProps,
+    cylinder: RegisterCylinderProps,
   ): Promise<boolean> {
     const accessToken = Storage.getItem('token');
-    const { data } = await api.post<CylinderDTO>('/gas', cylinder, {
+    const { data } = await api.post<CylinderResponseProps>('/gas', cylinder, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -23,7 +23,7 @@ export function useCreateCylinder() {
   }
 
   const { isLoading: isCreatingCylinder, mutateAsync: createCylinder } =
-    useMutation<boolean, Error, RegisterCylinderDTOProps>({
+    useMutation<boolean, Error, RegisterCylinderProps>({
       mutationKey: ['create_cylinder'],
       mutationFn: cylinder => fetchMutation(cylinder),
       onError: () => setIsCreateCylinderError(true),

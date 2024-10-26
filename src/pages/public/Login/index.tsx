@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 
-import { LoginDTOProps } from '@/@types';
+import { CredentialsLoginProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
 import { PRIMARY_LOGO } from '@/config';
 import { useAuth, useLogin, useToaster } from '@/hooks';
@@ -11,8 +11,8 @@ export function Login() {
 
   const [showToast] = useToaster();
 
-  const [userCredentials, setUserCredentials] = useState<LoginDTOProps>(
-    {} as LoginDTOProps,
+  const [userCredentials, setUserCredentials] = useState<CredentialsLoginProps>(
+    {} as CredentialsLoginProps,
   );
 
   async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
@@ -57,24 +57,26 @@ export function Login() {
               type='email'
               value={userCredentials?.email}
               placeholder='E-mail'
-              onChangeText={email =>
-                setUserCredentials({ ...userCredentials, email })
-              }
+              minLength={6}
               isDisabled={isLoginLoading}
               isRequired
               isHugWidth
+              onChangeText={email =>
+                setUserCredentials({ ...userCredentials, email })
+              }
             />
 
             <Input
               type='password'
               value={userCredentials?.password}
               placeholder='Senha'
-              onChangeText={password =>
-                setUserCredentials({ ...userCredentials, password })
-              }
+              minLength={6}
               isDisabled={isLoginLoading}
               isRequired
               isHugWidth
+              onChangeText={password =>
+                setUserCredentials({ ...userCredentials, password })
+              }
             />
           </div>
 

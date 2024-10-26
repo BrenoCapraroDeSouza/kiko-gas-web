@@ -1,34 +1,26 @@
 import { FormEvent, memo, useEffect, useState } from 'react';
 
-import { RegistrationClientDTOProps } from '@/@types';
+import { RegistrationClientDataProps, RegistrationClientProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
 import { useToaster } from '@/hooks';
 import { getOnlyNumbers } from '@/utils';
 
-function RegistrationData(props: RegistrationClientDTOProps) {
+function RegistrationData(props: RegistrationClientProps) {
   const { onNextStep, ...rest } = props;
 
   const [showToast] = useToaster();
 
   const [registration, setRegistration] =
-    useState<Omit<RegistrationClientDTOProps, 'onNextStep'>>(rest);
-
-  function handlePasswordQuality(): boolean {
-    if (registration.password.length < 6) {
-      showToast('Senha muito curta!', 'Informe uma senha maior que 6 dígitos.');
-      return true;
-    } else if (registration.password !== registration.confirmPassword) {
-      showToast('Senhas incorretas!', 'As senhas informadas devem ser iguais.');
-      return true;
-    }
-
-    return false;
-  }
+    useState<RegistrationClientDataProps>(rest);
 
   function onSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    if (handlePasswordQuality()) return;
+    if (registration.password !== registration.confirmPassword)
+      return showToast(
+        'Senhas incorretas!',
+        'As senhas informadas devem ser iguais.',
+      );
 
     onNextStep(registration);
   }
@@ -104,6 +96,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.password}
             type='password'
             placeholder='Senha'
+            minLength={6}
             isRequired
             onChangeText={password =>
               setRegistration({ ...registration, password })
@@ -114,6 +107,7 @@ function RegistrationData(props: RegistrationClientDTOProps) {
             value={registration.confirmPassword}
             type='password'
             placeholder='Confirmar Senha'
+            minLength={6}
             isRequired
             onChangeText={confirmPassword =>
               setRegistration({ ...registration, confirmPassword })

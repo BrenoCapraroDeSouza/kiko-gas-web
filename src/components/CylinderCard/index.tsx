@@ -51,12 +51,14 @@ function CylinderCard(props: CylinderCardProps) {
       <div className='flex h-full items-center gap-7'>
         <IntuitiveButton
           variant='edit'
+          title='Editar botijão'
           isDisabled={isDisabled}
           onClick={onEdit}
         />
 
         <IntuitiveButton
           variant='delete'
+          title='Deletar botijão'
           isDisabled={isDisabled}
           onClick={onDelete}
         />

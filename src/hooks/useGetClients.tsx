@@ -1,14 +1,14 @@
 import { useQuery } from 'react-query';
 
-import { ClientDTO } from '@/@types';
+import { ClientResponseProps } from '@/@types';
 import { api } from '@/config';
 import { Storage } from '@/helpers';
 
 export function useGetClients() {
-  async function fetchQuery(): Promise<ClientDTO[]> {
+  async function fetchQuery(): Promise<ClientResponseProps[]> {
     const accessToken = Storage.getItem('token');
 
-    const { data } = await api.get<ClientDTO[]>('/clients', {
+    const { data } = await api.get<ClientResponseProps[]>('/clients', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

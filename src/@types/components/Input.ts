@@ -31,6 +31,17 @@ export interface InputProps {
    * @default undefined
    */
   placeholder?: string;
+
+  /**
+   * @property minLength
+   * @type {number | undefined}
+   *
+   * @description This property to be applied to the input type of `email`,
+   * `password` and `text`.
+   *
+   * @default undefined
+   */
+  minLength?: number;
   isDisabled?: boolean;
   isRequired?: boolean;
   isHugWidth?: boolean;

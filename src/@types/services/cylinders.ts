@@ -1,4 +1,4 @@
-export interface CylinderDTO {
+export interface CylinderResponseProps {
   id: string;
   name: string;
   description: string;

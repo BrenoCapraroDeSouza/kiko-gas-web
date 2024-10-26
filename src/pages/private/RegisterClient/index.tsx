@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  CylinderDTO,
-  RegisterClientDTOProps,
+  RegisterClientCylinder,
+  RegisterClientDataProps,
+  RegisterClientProps,
   RegisterClientStep,
 } from '@/@types';
 import { useCreateClient, useGetCylinders, useToaster } from '@/hooks';
@@ -13,8 +14,8 @@ import { FinancialData, RegistrationData } from './components';
 export function RegisterClient() {
   const [currentStep, setCurrentStep] =
     useState<RegisterClientStep>('registration');
-  const [newClient, setNewClient] = useState<RegisterClientDTOProps>(
-    {} as RegisterClientDTOProps,
+  const [newClient, setNewClient] = useState<RegisterClientProps>(
+    {} as RegisterClientProps,
   );
 
   const navigate = useNavigate();
@@ -27,24 +28,24 @@ export function RegisterClient() {
     setIsCreateClientError,
   } = useCreateClient();
 
-  function goToFinancialStep(
-    data: Omit<RegisterClientDTOProps, 'gasCylinders'>,
-  ): void {
+  function goToFinancialStep(data: RegisterClientDataProps): void {
     setNewClient({ ...newClient, ...data });
     setCurrentStep('financial');
   }
 
-  function goBackRegistrationStep(data: CylinderDTO[]): void {
-    setNewClient({ ...newClient, gasCylinders: [...data] });
+  function goBackRegistrationStep(data: RegisterClientCylinder[]): void {
+    setNewClient({ ...newClient, cylinders: [...data] });
     setCurrentStep('registration');
   }
 
-  async function handleFinishRegistration(data: CylinderDTO[]): Promise<void> {
-    setNewClient({ ...newClient, gasCylinders: [...data] });
+  async function handleFinishRegistration(
+    data: RegisterClientCylinder[],
+  ): Promise<void> {
+    setNewClient({ ...newClient, cylinders: [...data] });
 
     const isCreated = await createClient({
       ...newClient,
-      gasCylinders: [...data],
+      cylinders: [...data],
     });
 
     if (isCreated) {
@@ -76,7 +77,7 @@ export function RegisterClient() {
         <FinancialData
           onPreviousStep={goBackRegistrationStep}
           onFinish={handleFinishRegistration}
-          gasCylinders={cylinders}
+          cylinders={cylinders}
           defaultCylinders={cylinders}
           isLoading={isCreatingClient}
         />
