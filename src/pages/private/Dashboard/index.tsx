@@ -216,9 +216,8 @@ export function Dashboard() {
         />
       )),
       historic: HISTORICS.map(historic => (
-        <HistoricCard {...historic} key={historic.id} /> //------------------------
+        <HistoricCard {...historic} key={historic.id} />
       )),
-
       requests: REQUESTS.map(signal => (
         <SignalCard {...signal} key={signal.id} />
       )),
@@ -263,7 +262,7 @@ export function Dashboard() {
 
   useEffect(() => {
     refreshes[currentTab]();
-  }, [currentTab, isClientTab, refreshes]);
+  }, [currentTab, refreshes]);
 
   return (
     <main className='flex flex-col w-full h-screen'>
