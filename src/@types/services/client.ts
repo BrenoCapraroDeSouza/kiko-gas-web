@@ -1,9 +1,9 @@
-export interface AddressDTO {
+export interface ClientAddressResponseProps {
   name: string;
   address: string;
 }
 
-export interface ClientDTO {
+export interface ClientResponseProps {
   id: string;
   userId: string;
   resaleId: string;
@@ -13,5 +13,5 @@ export interface ClientDTO {
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  addresses: AddressDTO[];
+  addresses: ClientAddressResponseProps[];
 }

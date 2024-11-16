@@ -13,6 +13,7 @@ function Input(props: InputProps) {
     value = '',
     placeholder = '',
     type = 'text',
+    minLength,
     onChangeText,
   } = props;
 
@@ -51,7 +52,11 @@ function Input(props: InputProps) {
   };
 
   const defaultInput: React.JSX.Element = (
-    <input type={isVisibleText ? 'text' : type} {...commonInputProps} />
+    <input
+      type={isVisibleText ? 'text' : type}
+      minLength={minLength}
+      {...commonInputProps}
+    />
   );
 
   const inputs: Record<InputType, React.JSX.Element> = {

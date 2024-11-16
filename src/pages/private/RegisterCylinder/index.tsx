@@ -1,15 +1,15 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RegisterCylinderDTOProps } from '@/@types';
+import { RegisterCylinderProps } from '@/@types';
 import { Button, Input, Text } from '@/components';
 import { currencyToNumber } from '@/helpers';
 import { useCreateCylinder, useDashboard, useToaster } from '@/hooks';
 import { removeKgSuffix } from '@/utils';
 
 export function RegisterCylinder() {
-  const [registration, setRegistration] = useState<RegisterCylinderDTOProps>(
-    {} as RegisterCylinderDTOProps,
+  const [registration, setRegistration] = useState<RegisterCylinderProps>(
+    {} as RegisterCylinderProps,
   );
 
   const navigate = useNavigate();

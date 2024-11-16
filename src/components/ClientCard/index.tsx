@@ -52,12 +52,14 @@ function ClientCard(props: ClientCardProps) {
       <div className='flex h-full items-center gap-7'>
         <IntuitiveButton
           variant='info'
+          title='Visualizar informações dos botijões do cliente'
           isDisabled={isDisabled}
           onClick={onInfo}
         />
 
         <IntuitiveButton
           variant='delete'
+          title='Deletar cliente'
           isDisabled={isDisabled}
           onClick={onDelete}
         />

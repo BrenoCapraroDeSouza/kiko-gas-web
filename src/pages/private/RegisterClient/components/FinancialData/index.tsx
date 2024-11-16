@@ -1,43 +1,44 @@
 import { FormEvent, memo, useState } from 'react';
 import { NumericFormat } from 'react-number-format';
 
-import { CylinderDTO, FinancialClientDTOProps } from '@/@types';
+import { FinancialClientProps, RegisterClientCylinder } from '@/@types';
 import { Button, Icon, Text } from '@/components';
 import { currencyToNumber, formatCurrency } from '@/helpers';
 
-function FinancialData(props: FinancialClientDTOProps) {
-  const {
-    isLoading,
-    gasCylinders,
-    defaultCylinders,
-    onFinish,
-    onPreviousStep,
-  } = props;
+function FinancialData(props: FinancialClientProps) {
+  const { isLoading, cylinders, defaultCylinders, onFinish, onPreviousStep } =
+    props;
 
-  const [financial, setFinancial] = useState<CylinderDTO[]>(gasCylinders || []);
+  const [currentCylinders, setCurrentCylinders] = useState<
+    RegisterClientCylinder[]
+  >(cylinders || []);
 
-  function handleChangeCylinderPrice(gasCylinder: CylinderDTO): void {
-    const allCylindersWithNewPrices = financial.map(cylinder =>
-      cylinder.id !== gasCylinder.id ? cylinder : gasCylinder,
+  function handleChangeCylinderPrice(
+    cylinderWithPrice: RegisterClientCylinder,
+  ): void {
+    const allCylindersWithNewPrices = currentCylinders.map(cylinder =>
+      cylinder.id !== cylinderWithPrice.id ? cylinder : cylinderWithPrice,
     );
 
-    setFinancial(allCylindersWithNewPrices);
+    setCurrentCylinders(allCylindersWithNewPrices);
   }
 
   function handleGoBackToPreviousStep(): void {
-    onPreviousStep(financial);
+    onPreviousStep(currentCylinders);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
 
-    await onFinish(financial);
+    await onFinish(currentCylinders);
   }
 
-  const hasCylinders = !!financial.length;
-  const allPricesDefinedCorrectly = financial.every(
+  const hasCylinders = !!currentCylinders.length;
+  const allPricesDefinedCorrectly = currentCylinders.every(
     cylinder => !!cylinder.price.toString().trim(),
   );
+  const isFinishButtonDisabled =
+    !allPricesDefinedCorrectly || !hasCylinders || isLoading;
 
   return (
     <div className='px-14 py-10 bg-content rounded-2xl'>
@@ -67,7 +68,7 @@ function FinancialData(props: FinancialClientDTOProps) {
             </div>
           )}
 
-          {financial.map((cylinder, index) => {
+          {currentCylinders.map((cylinder, index) => {
             const isChanged = cylinder.price !== defaultCylinders[index].price;
             const priceFormatted = formatCurrency(cylinder.price);
 
@@ -147,9 +148,7 @@ function FinancialData(props: FinancialClientDTOProps) {
               type='submit'
               title='Finalizar'
               isLoading={isLoading}
-              isDisabled={
-                !allPricesDefinedCorrectly || !hasCylinders || isLoading
-              }
+              isDisabled={isFinishButtonDisabled}
               isHugWidth
             />
           </div>

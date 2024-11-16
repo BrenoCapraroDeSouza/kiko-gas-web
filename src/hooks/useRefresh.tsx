@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 
-import { LoginResponseDTOProps } from '@/@types';
+import { RefreshResponseProps } from '@/@types';
 import { api } from '@/config';
 import { Storage } from '@/helpers';
 
@@ -13,7 +13,7 @@ export function useRefresh() {
 
     const accessToken = Storage.getItem('token');
 
-    const { data } = await api.post<LoginResponseDTOProps>(
+    const { data } = await api.post<RefreshResponseProps>(
       '/refresh',
       {},
       {
