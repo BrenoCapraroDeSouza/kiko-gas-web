@@ -10,6 +10,7 @@ import Input from './Input';
 import IntuitiveButton from './IntuitiveButton';
 import List from './List';
 import ProtectedRoute from './ProtectedRoute';
+import SignalCard from './SignalCard';
 import SignalStatus from './SignalStatus';
 import Spinner from './Spinner';
 import TabButton from './TabButton';
@@ -29,6 +30,7 @@ export {
   IntuitiveButton,
   List,
   ProtectedRoute,
+  SignalCard,
   SignalStatus,
   Spinner,
   TabButton,
