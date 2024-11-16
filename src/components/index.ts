@@ -2,13 +2,18 @@ import AddButton from './AddButton';
 import Button from './Button';
 import Chip from './Chip';
 import ClientCard from './ClientCard';
+import CloseModalButton from './CloseModalButton';
 import CylinderCard from './CylinderCard';
+import CylindersModal from './CylindersModal';
+import Dialog from './Dialog';
+import EditCylinderModal from './EditCylinderModal';
 import EmptyList from './EmptyList';
 import Header from './Header';
 import Icon from './Icon';
 import Input from './Input';
 import IntuitiveButton from './IntuitiveButton';
 import List from './List';
+import Modal from './Modal';
 import ProtectedRoute from './ProtectedRoute';
 import SignalCard from './SignalCard';
 import SignalStatus from './SignalStatus';
@@ -22,13 +27,18 @@ export {
   Button,
   Chip,
   ClientCard,
+  CloseModalButton,
   CylinderCard,
+  CylindersModal,
+  Dialog,
+  EditCylinderModal,
   EmptyList,
   Header,
   Icon,
   Input,
   IntuitiveButton,
   List,
+  Modal,
   ProtectedRoute,
   SignalCard,
   SignalStatus,

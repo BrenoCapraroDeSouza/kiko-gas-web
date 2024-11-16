@@ -1,18 +1,21 @@
 import { memo } from 'react';
 
 import { ClientCardProps } from '@/@types';
+import { useDialog } from '@/hooks';
 
 import { Icon, IntuitiveButton, Text } from '..';
 
 function ClientCard(props: ClientCardProps) {
   const { id, name, cpfcnpj, email, phone, isDisabled = false } = props;
 
+  const { handleOpen } = useDialog();
+
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
 
   function onInfo(): void {}
 
   function onDelete(): void {
-    console.log(id);
+    handleOpen({ id, name, variant: 'client' });
   }
 
   return (
