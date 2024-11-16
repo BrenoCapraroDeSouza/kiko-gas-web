@@ -15,7 +15,7 @@ function CylinderCard(props: CylinderCardProps) {
   function onEdit(): void {}
 
   function onDelete(): void {
-    handleOpen({ id, name: cylinderName, variant: 'cylinder' });
+    handleOpen({ id, name, variant: 'cylinder' });
   }
 
   return (
