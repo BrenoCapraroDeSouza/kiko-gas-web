@@ -31,14 +31,22 @@ export default {
       width: {
         25: '6.25rem',
         128: '32rem',
+        144: '36rem',
         189: '47.25rem',
       },
 
       maxWidth: {
         108: '27rem',
+        144: '36rem',
+      },
+
+      minWidth: {
+        128: '32rem',
       },
 
       maxHeight: {
+        75: '18.75rem',
+        121: '30.25rem',
         148: '37rem',
       },
     },

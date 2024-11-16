@@ -2,6 +2,7 @@ export * from './useAuth';
 export * from './useCreateClient';
 export * from './useCreateCylinder';
 export * from './useDashboard';
+export * from './useDialog';
 export * from './useGetClients';
 export * from './useGetCylinders';
 export * from './useLogin';

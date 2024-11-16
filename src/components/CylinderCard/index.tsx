@@ -1,20 +1,21 @@
 import { memo } from 'react';
 
 import { CylinderCardProps } from '@/@types';
+import { useDialog } from '@/hooks';
 
 import { Icon, IntuitiveButton, Text } from '..';
 
 function CylinderCard(props: CylinderCardProps) {
   const { id, name, description, price, isDisabled = false } = props;
 
+  const { handleOpen } = useDialog();
+
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
 
-  function onEdit(): void {
-    console.log(id);
-  }
+  function onEdit(): void {}
 
   function onDelete(): void {
-    console.log(id);
+    handleOpen({ id, name: cylinderName, variant: 'cylinder' });
   }
 
   return (
