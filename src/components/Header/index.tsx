@@ -1,8 +1,7 @@
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import { memo } from 'react';
 
 import { HeaderProps } from '@/@types';
+import { getCurrentDateFormatted } from '@/helpers';
 import { useAuth, useDashboard } from '@/hooks';
 
 import { Icon, TabButton, Text } from '..';
@@ -13,9 +12,7 @@ function Header(props: HeaderProps) {
   const { handleLogout } = useAuth();
   const { username, currentTab, changeToNextTab } = useDashboard();
 
-  const formattedCurrentDate = format(new Date(), "EEEE, dd 'de' MMMM", {
-    locale: ptBR,
-  });
+  const currentDate = getCurrentDateFormatted();
 
   return (
     <header className='flex flex-col w-full min-h-64 p-10 pt-8 bg-content border-b border-b-secondary'>
@@ -42,7 +39,7 @@ function Header(props: HeaderProps) {
             size='small'
             className='first-letter:uppercase'
           >
-            {formattedCurrentDate}
+            {currentDate}
           </Text>
         </div>
       </div>

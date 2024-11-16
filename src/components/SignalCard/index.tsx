@@ -1,17 +1,16 @@
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import { memo } from 'react';
 
 import { IconVariant, SignalCardProps, SignalPaymentType } from '@/@types';
-import { formatCurrency } from '@/helpers';
+import { formatCurrency, formatToTraditionalDate } from '@/helpers';
 
-import { Button, Chip, Icon, Text } from '..';
+import { Button, Chip, Icon, Text } from '../index';
 
 function SignalCard(props: SignalCardProps) {
   const { id, type, client, createdAt, isDisabled = false } = props;
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
   const isPixPayment = client.cylinder.paymentType === 'pix';
+  const requestedDate = formatToTraditionalDate(createdAt);
   const exchangeLabel = client.cylinder.exchange
     ? `(Troco para ${formatCurrency(client.cylinder.exchange)}}`
     : '';
@@ -23,10 +22,6 @@ function SignalCard(props: SignalCardProps) {
   function onAccept(): void {
     console.log(id);
   }
-
-  const formattedSignalDate = format(createdAt, "dd/MM/yy 'às' H'h'm'm'", {
-    locale: ptBR,
-  });
 
   const icons: Record<SignalPaymentType, IconVariant> = {
     money: 'money',
@@ -95,7 +90,7 @@ function SignalCard(props: SignalCardProps) {
           <div className='flex justify-between items-center gap-1'>
             <Icon size='small' variant='calendar-dots' />
 
-            <Text weight='medium'>Solicitado em {formattedSignalDate}</Text>
+            <Text weight='medium'>Solicitado em {requestedDate}</Text>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ export * from './CylindersModal';
 export * from './Dialog';
 export * from './EditCylinderModal';
 export * from './Header';
+export * from './HistoricCard';
 export * from './Icon';
 export * from './Input';
 export * from './IntuitiveButton';

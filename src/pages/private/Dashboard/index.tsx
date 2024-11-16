@@ -1,13 +1,19 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { HeaderActionProps, SignalCardProps, TabButtonVariant } from '@/@types';
+import {
+  HeaderActionProps,
+  HistoricCardProps,
+  SignalCardProps,
+  TabButtonVariant,
+} from '@/@types';
 import {
   AddButton,
   ClientCard,
   CylinderCard,
   EmptyList,
   Header,
+  HistoricCard,
   List,
   SignalCard,
   Spinner,
@@ -98,6 +104,89 @@ const REQUESTS: SignalCardProps[] = [
   },
 ];
 
+const HISTORICS: HistoricCardProps[] = [
+  {
+    id: '1',
+    type: 'accepted',
+    status: 'collection',
+    client: {
+      id: '1',
+      name: 'Benjamin Enrico Alves',
+      cpfcnpj: '238.435.761-14',
+      address: 'Rua das Flores, 13, Balneário Camboriú - SC, 88129-912',
+      cylinder: {
+        id: '4',
+        name: 'P20',
+        description: 'Industrial',
+        price: 140,
+        paymentType: 'money',
+        exchange: null,
+      },
+    },
+    createdAt: new Date(),
+  },
+  {
+    id: '2',
+    type: 'refused',
+    status: 'replenishment',
+    client: {
+      id: '1',
+      name: 'Nilson Andrade Neto',
+      cpfcnpj: '238.435.001-14',
+      address: 'Rua das Flores, 13, Balneário Piçarras - SC, 88129-912',
+      cylinder: {
+        id: '7',
+        name: 'P20',
+        description: 'Industrial',
+        price: 140,
+        paymentType: 'money',
+        exchange: null,
+      },
+    },
+    createdAt: new Date(),
+  },
+  {
+    id: '3',
+    type: 'accepted',
+    status: 'request',
+    client: {
+      id: '1',
+      name: 'Cauã Ribas Adami Devitte',
+      cpfcnpj: '123.435.001-15',
+      address: 'Rua das Flores, 13, Ponta Grossa - PR, 88129-912',
+      cylinder: {
+        id: '7',
+        name: 'P13',
+        description: 'Industrial',
+        price: 140,
+        paymentType: 'pix',
+        exchange: null,
+      },
+    },
+    createdAt: new Date(),
+  },
+  {
+    id: '4',
+    type: 'accepted',
+    status: 'request',
+    client: {
+      id: '1',
+      name: 'Cauã Ribas Adami Devitte',
+      cpfcnpj: '123.435.001-15',
+      address: 'Rua das Flores, 13, Ponta Grossa - PR, 88129-912',
+      cylinder: {
+        id: '8',
+        name: 'P20',
+        description: 'Comercial',
+        price: 140,
+        paymentType: 'money',
+        exchange: 150,
+      },
+    },
+    createdAt: new Date(),
+  },
+];
+
 export function Dashboard() {
   const { currentTab } = useDashboard();
   const { clients, isClientLoading, refreshClients } = useGetClients();
@@ -126,7 +215,9 @@ export function Dashboard() {
           price={formatCurrency(cylinder.price)}
         />
       )),
-      historic: Array.from([]).map((_, index) => <div key={index} />),
+      historic: HISTORICS.map(historic => (
+        <HistoricCard {...historic} key={historic.id} />
+      )),
       requests: REQUESTS.map(signal => (
         <SignalCard {...signal} key={signal.id} />
       )),
@@ -171,7 +262,7 @@ export function Dashboard() {
 
   useEffect(() => {
     refreshes[currentTab]();
-  }, [currentTab, isClientTab, refreshes]);
+  }, [currentTab, refreshes]);
 
   return (
     <main className='flex flex-col w-full h-screen'>

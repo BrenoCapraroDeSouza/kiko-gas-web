@@ -9,6 +9,7 @@ import Dialog from './Dialog';
 import EditCylinderModal from './EditCylinderModal';
 import EmptyList from './EmptyList';
 import Header from './Header';
+import HistoricCard from './HistoricCard';
 import Icon from './Icon';
 import Input from './Input';
 import IntuitiveButton from './IntuitiveButton';
@@ -34,6 +35,7 @@ export {
   EditCylinderModal,
   EmptyList,
   Header,
+  HistoricCard,
   Icon,
   Input,
   IntuitiveButton,

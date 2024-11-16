@@ -36,6 +36,7 @@ export default {
       },
 
       maxWidth: {
+        108: '27rem',
         144: '36rem',
       },
 
