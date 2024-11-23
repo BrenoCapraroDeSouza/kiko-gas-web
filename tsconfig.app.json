@@ -23,7 +23,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+
+    /* Types */
+    "types": ["cypress", "node"]
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts", "./cypress/support/index.d.ts"]
 }
