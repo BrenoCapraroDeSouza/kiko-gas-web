@@ -1,4 +1,5 @@
-import { QueryClientWrapperSut } from '@/pages/mocks';
+import { PRIMARY_LOGO } from '@/config';
+import { QueryClientWrapperSut } from '@/pages/public/mocks';
 
 import { Login } from './index';
 
@@ -31,6 +32,7 @@ describe('<Login />', () => {
     cy.get('input[type="password"]').should('be.empty').should('be.enabled');
     cy.get('button[type="button"]').should('be.enabled');
     cy.get('button[type="submit"]').should('be.enabled').contains('Entrar');
+    cy.get('img').should('have.attr', 'src').should('include', PRIMARY_LOGO);
   });
 
   it('Should show password entered by user when user click in the input password', () => {
