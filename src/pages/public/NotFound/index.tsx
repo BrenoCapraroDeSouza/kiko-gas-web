@@ -28,7 +28,7 @@ export function NotFound() {
         </div>
 
         <Button
-          title='Voltar ao Inicio'
+          title='Voltar ao Início'
           isHugWidth
           onClick={navigateToInitialPage}
         />

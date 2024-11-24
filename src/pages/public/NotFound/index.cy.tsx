@@ -31,7 +31,7 @@ describe('<NotFound />', () => {
     cy.contains('A pagina que você procura não está aqui.');
     cy.get('button[type="button"]')
       .should('be.enabled')
-      .contains('Voltar ao Inicio');
+      .contains('Voltar ao Início');
     cy.get('img').should('have.attr', 'src').should('include', PRIMARY_LOGO);
   });
 });
