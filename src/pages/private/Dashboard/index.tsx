@@ -1,12 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  HeaderActionProps,
-  HistoricCardProps,
-  SignalCardProps,
-  TabButtonVariant,
-} from '@/@types';
+import { HeaderActionProps, TabButtonVariant } from '@/@types';
 import {
   AddButton,
   ClientCard,
@@ -21,171 +16,7 @@ import {
 import { formatCurrency } from '@/helpers';
 import { useDashboard, useGetClients, useGetCylinders } from '@/hooks';
 
-const REQUESTS: SignalCardProps[] = [
-  {
-    id: '1',
-    type: 'collection',
-    client: {
-      id: '1',
-      name: 'Benjamin Enrico Alves',
-      cpfcnpj: '238.435.761-14',
-      address: 'Rua das Flores, 13, Balneário Camboriú - SC, 88129-912',
-      phone: '(81) 99770-9226',
-      cylinder: {
-        id: '1',
-        name: 'P13',
-        description: 'Residencial',
-        price: 140,
-        paymentType: null,
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '2',
-    type: 'request',
-    client: {
-      id: '2',
-      name: 'Gabriel da Silva',
-      cpfcnpj: '333.456.789-00',
-      address: 'Rua das Águas, 122, Itapema - SC, 88129-092',
-      phone: '(67) 98684-4681',
-      cylinder: {
-        id: '2',
-        name: 'P20',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'pix',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '3',
-    type: 'replenishment',
-    client: {
-      id: '3',
-      name: 'Rafaela Esther Gomes',
-      cpfcnpj: '156.776.298-04',
-      address: 'Rua das Arvores, 23, Itajaí - SC, 88672-109',
-      phone: '(27) 99676-8615',
-      cylinder: {
-        id: '3',
-        name: 'P13',
-        description: 'Residencial',
-        price: 140,
-        paymentType: 'money',
-        exchange: 150,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '4',
-    type: 'request',
-    client: {
-      id: '4',
-      name: 'Rafaela Esther Gomes',
-      cpfcnpj: '156.776.298-04',
-      address: 'Rua das Arvores, 23, Itajaí - SC, 88672-109',
-      phone: '(27) 99676-8615',
-      cylinder: {
-        id: '4',
-        name: 'P20',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'money',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-];
-
-const HISTORICS: HistoricCardProps[] = [
-  {
-    id: '1',
-    type: 'accepted',
-    status: 'collection',
-    client: {
-      id: '1',
-      name: 'Benjamin Enrico Alves',
-      cpfcnpj: '238.435.761-14',
-      address: 'Rua das Flores, 13, Balneário Camboriú - SC, 88129-912',
-      cylinder: {
-        id: '4',
-        name: 'P20',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'money',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '2',
-    type: 'refused',
-    status: 'replenishment',
-    client: {
-      id: '1',
-      name: 'Nilson Andrade Neto',
-      cpfcnpj: '238.435.001-14',
-      address: 'Rua das Flores, 13, Balneário Piçarras - SC, 88129-912',
-      cylinder: {
-        id: '7',
-        name: 'P20',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'money',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '3',
-    type: 'accepted',
-    status: 'request',
-    client: {
-      id: '1',
-      name: 'Cauã Ribas Adami Devitte',
-      cpfcnpj: '123.435.001-15',
-      address: 'Rua das Flores, 13, Ponta Grossa - PR, 88129-912',
-      cylinder: {
-        id: '7',
-        name: 'P13',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'pix',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '4',
-    type: 'accepted',
-    status: 'request',
-    client: {
-      id: '1',
-      name: 'Cauã Ribas Adami Devitte',
-      cpfcnpj: '123.435.001-15',
-      address: 'Rua das Flores, 13, Ponta Grossa - PR, 88129-912',
-      cylinder: {
-        id: '8',
-        name: 'P20',
-        description: 'Comercial',
-        price: 140,
-        paymentType: 'money',
-        exchange: 150,
-      },
-    },
-    createdAt: new Date(),
-  },
-];
+import { HISTORIES, REQUESTS } from './mocks';
 
 export function Dashboard() {
   const { currentTab } = useDashboard();
@@ -215,7 +46,7 @@ export function Dashboard() {
           price={formatCurrency(cylinder.price)}
         />
       )),
-      historic: HISTORICS.map(historic => (
+      historic: HISTORIES.map(historic => (
         <HistoricCard {...historic} key={historic.id} />
       )),
       requests: REQUESTS.map(signal => (
