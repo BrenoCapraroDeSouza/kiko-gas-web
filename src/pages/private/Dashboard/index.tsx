@@ -13,7 +13,6 @@ import {
   SignalCard,
   Spinner,
 } from '@/components';
-import { formatCurrency } from '@/helpers';
 import { useDashboard, useGetClients, useGetCylinders } from '@/hooks';
 
 import { HISTORIES, REQUESTS } from './mocks';
@@ -43,7 +42,8 @@ export function Dashboard() {
         <CylinderCard
           {...cylinder}
           key={cylinder.id}
-          price={formatCurrency(cylinder.price)}
+          weight={cylinder.weight}
+          price={cylinder.price}
         />
       )),
       historic: HISTORIES.map(historic => (

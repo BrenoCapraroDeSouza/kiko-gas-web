@@ -66,6 +66,7 @@ export function RegisterCylinder() {
         <form onSubmit={onSubmit}>
           <div className='flex flex-col mb-5 gap-5'>
             <Input
+              value={registration?.name}
               placeholder='Nome'
               isDisabled={isCreatingCylinder}
               isRequired
@@ -73,6 +74,7 @@ export function RegisterCylinder() {
             />
 
             <Input
+              value={registration?.description}
               placeholder='Descrição'
               isDisabled={isCreatingCylinder}
               isRequired
@@ -83,6 +85,7 @@ export function RegisterCylinder() {
 
             <Input
               type='currency'
+              value={registration?.price?.toString()}
               placeholder='Preço'
               isDisabled={isCreatingCylinder}
               isRequired
@@ -96,6 +99,7 @@ export function RegisterCylinder() {
 
             <Input
               type='weight'
+              value={registration?.weight?.toString()}
               placeholder='Peso'
               isDisabled={isCreatingCylinder}
               isRequired

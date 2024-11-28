@@ -3,4 +3,5 @@ export interface EditCylinderProps {
   name: string;
   description: string;
   price: number;
+  weight: number;
 }
