@@ -12,20 +12,20 @@ import { Icon, Text } from '..';
 function SignalStatus(props: SignalStatusProps) {
   const { variant } = props;
 
-  const isCollection = variant === 'collection';
+  const isCollection = variant === 'COLLECTION';
   const borderColor = isCollection ? 'border-primary' : 'border-secondary';
   const color: Colors = isCollection ? 'primary' : 'secondary';
 
   const signalStatusIcons: Record<SignalStatusVariant, IconVariant> = {
-    collection: 'backspace',
-    replenishment: 'arrows-counter-clockwise',
-    request: 'hand',
+    COLLECTION: 'backspace',
+    REPLENISHMENT: 'arrows-counter-clockwise',
+    REQUEST: 'hand',
   };
 
   const labels: Record<SignalStatusVariant, string> = {
-    collection: 'Recolhimento',
-    replenishment: 'Reabastecimento',
-    request: 'Pedido',
+    COLLECTION: 'Recolhimento',
+    REPLENISHMENT: 'Reabastecimento',
+    REQUEST: 'Pedido',
   };
 
   return (

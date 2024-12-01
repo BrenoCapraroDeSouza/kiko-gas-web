@@ -1,8 +1,8 @@
-export type HistoricCardStatus = 'collection' | 'replenishment' | 'request';
+export type HistoricCardStatus = 'COLLECTION' | 'REPLENISHMENT' | 'REQUEST';
 
-export type HistoricCardType = 'accepted' | 'refused';
+export type HistoricCardType = 'ACCEPTED' | 'REFUSED';
 
-export type HistoricPaymentType = 'money' | 'pix';
+export type HistoricPaymentType = 'PIX' | 'MONEY';
 
 export interface HistoricCardCylinderProps {
   id: string;

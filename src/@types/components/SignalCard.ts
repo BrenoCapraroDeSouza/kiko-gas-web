@@ -1,6 +1,6 @@
-export type SignalCardType = 'collection' | 'replenishment' | 'request';
+export type SignalCardType = 'COLLECTION' | 'REPLENISHMENT' | 'REQUEST';
 
-export type SignalPaymentType = 'money' | 'pix';
+export type SignalPaymentType = 'PIX' | 'MONEY';
 
 export interface SignalCardCylinderProps {
   id: string;

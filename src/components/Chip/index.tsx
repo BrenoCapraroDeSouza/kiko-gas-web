@@ -7,15 +7,15 @@ import { Text } from '..';
 function Chip(props: ChipProps) {
   const { variant } = props;
 
-  const shouldCollect = variant === 'refused' || variant === 'collection';
+  const shouldCollect = variant === 'REFUSED' || variant === 'COLLECTION';
   const borderColor = shouldCollect ? 'border-primary' : 'border-secondary';
 
   const labels: Record<ChipVariant, string> = {
-    accepted: 'Aceito',
-    refused: 'Recusado',
-    collection: 'Recolhimento',
-    replenishment: 'Reabastecimento',
-    request: 'Pedido',
+    ACCEPTED: 'Aceito',
+    REFUSED: 'Recusado',
+    COLLECTION: 'Recolhimento',
+    REPLENISHMENT: 'Reabastecimento',
+    REQUEST: 'Pedido',
   };
 
   return (

@@ -6,6 +6,7 @@ export * from './useDialog';
 export * from './useEditCylinder';
 export * from './useGetClients';
 export * from './useGetCylinders';
+export * from './useGetRequests';
 export * from './useLogin';
 export * from './useRefresh';
 export * from './useToaster';

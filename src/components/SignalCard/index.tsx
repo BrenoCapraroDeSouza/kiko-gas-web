@@ -9,7 +9,7 @@ function SignalCard(props: SignalCardProps) {
   const { id, type, client, createdAt, isDisabled = false } = props;
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
-  const isPixPayment = client.cylinder.paymentType === 'pix';
+  const isPixPayment = client.cylinder.paymentType === 'PIX';
   const requestedDate = formatToTraditionalDate(createdAt);
   const exchangeLabel = client.cylinder.exchange
     ? `(Troco para ${formatCurrency(client.cylinder.exchange)}}`
@@ -24,8 +24,8 @@ function SignalCard(props: SignalCardProps) {
   }
 
   const icons: Record<SignalPaymentType, IconVariant> = {
-    money: 'money',
-    pix: 'pix-logo',
+    MONEY: 'money',
+    PIX: 'pix-logo',
   };
 
   return (
