@@ -12,7 +12,7 @@ function SignalCard(props: SignalCardProps) {
   const isPixPayment = client.cylinder.paymentType === 'PIX';
   const requestedDate = formatToTraditionalDate(createdAt);
   const exchangeLabel = client.cylinder.exchange
-    ? `(Troco para ${formatCurrency(client.cylinder.exchange)}}`
+    ? `(Troco para ${formatCurrency(client.cylinder.exchange)})`
     : '';
 
   function onRecuse(): void {
