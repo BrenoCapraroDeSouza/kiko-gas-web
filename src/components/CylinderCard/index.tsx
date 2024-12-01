@@ -1,7 +1,7 @@
 import { FormEvent, memo, useEffect, useState } from 'react';
 
 import { CylinderCardProps, EditCylinderCardProps } from '@/@types';
-import { currencyToNumber } from '@/helpers';
+import { currencyToNumber, formatCurrency } from '@/helpers';
 import { useDialog } from '@/hooks';
 import { removeKgSuffix } from '@/utils';
 
@@ -70,7 +70,7 @@ function CylinderCard(props: CylinderCardProps) {
 
           <div className='flex items-center gap-1'>
             <Text weight='semibold' color='primary'>
-              {price}
+              {formatCurrency(price)}
             </Text>
 
             <Text weight='medium' color='secondary70'>
