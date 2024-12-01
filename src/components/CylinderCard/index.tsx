@@ -43,11 +43,14 @@ function CylinderCard(props: CylinderCardProps) {
     event.preventDefault();
   }
 
+  const priceFormatted = cylinder?.price?.toFixed(2);
+  const weightFormatted = cylinder?.weight?.toFixed(2);
+
   const isEditable =
     !cylinder?.name ||
     !cylinder?.description ||
-    !cylinder?.price?.toString() ||
-    !cylinder?.weight?.toString();
+    !priceFormatted ||
+    !weightFormatted;
 
   useEffect(() => {
     setCylinder({ id, name, description, price, weight });
@@ -131,7 +134,7 @@ function CylinderCard(props: CylinderCardProps) {
 
           <Input
             type='currency'
-            value={cylinder?.price?.toString()}
+            value={priceFormatted}
             placeholder='Preço'
             isRequired
             isHugWidth
@@ -142,7 +145,7 @@ function CylinderCard(props: CylinderCardProps) {
 
           <Input
             type='weight'
-            value={cylinder?.weight?.toString()}
+            value={weightFormatted}
             placeholder='Peso'
             isRequired
             isHugWidth
