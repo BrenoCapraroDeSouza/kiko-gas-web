@@ -2,7 +2,7 @@ import { FormEvent, memo, useEffect, useState } from 'react';
 
 import { CylinderCardProps, EditCylinderCardProps } from '@/@types';
 import { currencyToNumber, formatCurrency } from '@/helpers';
-import { useDialog } from '@/hooks';
+import { useDialog, useEditCylinder, useToaster } from '@/hooks';
 import { removeKgSuffix } from '@/utils';
 
 import {
@@ -23,7 +23,14 @@ function CylinderCard(props: CylinderCardProps) {
     {} as EditCylinderCardProps,
   );
 
+  const {
+    isEditingCylinder,
+    isEditCylinderError,
+    editCylinder,
+    setIsEditCylinderError,
+  } = useEditCylinder();
   const { handleOpen } = useDialog();
+  const [showToast] = useToaster();
 
   const opacity = isDisabled ? 'opacity-80' : 'opacity-100';
 
@@ -39,8 +46,20 @@ function CylinderCard(props: CylinderCardProps) {
     handleOpen({ id, name, variant: 'cylinder' });
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>): void {
+  async function onSubmit(event: FormEvent<HTMLFormElement>): Promise<void> {
     event.preventDefault();
+
+    const editedCylinder = await editCylinder(cylinder);
+
+    if (editedCylinder?.id) {
+      showToast(
+        'Editado com sucesso!',
+        `O botijão de gás ${editedCylinder.name} foi editado com sucesso!`,
+      );
+
+      onCloseModal();
+      setCylinder({} as EditCylinderCardProps);
+    }
   }
 
   const priceFormatted = cylinder?.price?.toFixed(2);
@@ -51,6 +70,17 @@ function CylinderCard(props: CylinderCardProps) {
     !cylinder?.description ||
     !priceFormatted ||
     !weightFormatted;
+
+  useEffect(() => {
+    if (isEditCylinderError) {
+      setIsEditCylinderError(false);
+
+      showToast(
+        'Ops! Parece que algo não deu certo',
+        'Verifique os dados e tente novamente.',
+      );
+    }
+  }, [isEditCylinderError, setIsEditCylinderError, showToast]);
 
   useEffect(() => {
     setCylinder({ id, name, description, price, weight });
@@ -104,7 +134,10 @@ function CylinderCard(props: CylinderCardProps) {
           className='relative flex flex-col w-11/12 md:w-128 h-auto overflow-hidden justify-center items-center p-8 gap-5 rounded-2xl bg-content border border-secondary'
           onSubmit={onSubmit}
         >
-          <CloseModalButton onClose={onCloseModal} />
+          <CloseModalButton
+            isLoading={isEditingCylinder}
+            onClose={onCloseModal}
+          />
 
           <Text size='alternative' weight='semibold' className='text-center'>
             Botijão {name}
@@ -117,6 +150,7 @@ function CylinderCard(props: CylinderCardProps) {
           <Input
             value={cylinder?.name}
             placeholder='Nome'
+            isDisabled={isEditingCylinder}
             isRequired
             isHugWidth
             onChangeText={name => setCylinder({ ...cylinder, name })}
@@ -125,6 +159,7 @@ function CylinderCard(props: CylinderCardProps) {
           <Input
             value={cylinder?.description}
             placeholder='Descrição'
+            isDisabled={isEditingCylinder}
             isRequired
             isHugWidth
             onChangeText={description =>
@@ -136,6 +171,7 @@ function CylinderCard(props: CylinderCardProps) {
             type='currency'
             value={priceFormatted}
             placeholder='Preço'
+            isDisabled={isEditingCylinder}
             isRequired
             isHugWidth
             onChangeText={price =>
@@ -147,6 +183,7 @@ function CylinderCard(props: CylinderCardProps) {
             type='weight'
             value={weightFormatted}
             placeholder='Peso'
+            isDisabled={isEditingCylinder}
             isRequired
             isHugWidth
             onChangeText={weight =>
@@ -160,7 +197,8 @@ function CylinderCard(props: CylinderCardProps) {
           <Button
             type='submit'
             title='Editar'
-            isDisabled={isEditable}
+            isDisabled={isEditable || isEditingCylinder}
+            isLoading={isEditingCylinder}
             isHugWidth
           />
         </form>

@@ -29,7 +29,6 @@ export function useGetCylinders() {
   } = useQuery({
     queryKey: ['cylinders'],
     initialData: [],
-    refetchOnWindowFocus: 'always',
     refetchOnReconnect: 'always',
     queryFn: fetchQuery,
   });

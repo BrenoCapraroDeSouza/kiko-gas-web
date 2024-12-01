@@ -30,7 +30,6 @@ export function useGetClients() {
   } = useQuery({
     queryKey: ['clients'],
     initialData: [],
-    refetchOnWindowFocus: 'always',
     refetchOnReconnect: 'always',
     queryFn: fetchQuery,
   });
