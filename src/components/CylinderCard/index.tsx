@@ -62,14 +62,11 @@ function CylinderCard(props: CylinderCardProps) {
     }
   }
 
-  const priceFormatted = cylinder?.price?.toFixed(2);
-  const weightFormatted = cylinder?.weight?.toFixed(2);
-
   const isEditable =
     !cylinder?.name ||
     !cylinder?.description ||
-    !priceFormatted ||
-    !weightFormatted;
+    !cylinder?.price?.toString() ||
+    !cylinder?.weight?.toString();
 
   useEffect(() => {
     if (isEditCylinderError) {
@@ -148,7 +145,7 @@ function CylinderCard(props: CylinderCardProps) {
           </Text>
 
           <Input
-            value={cylinder?.name}
+            value={cylinder?.name || name}
             placeholder='Nome'
             isDisabled={isEditingCylinder}
             isRequired
@@ -157,7 +154,7 @@ function CylinderCard(props: CylinderCardProps) {
           />
 
           <Input
-            value={cylinder?.description}
+            value={cylinder?.description || description}
             placeholder='Descrição'
             isDisabled={isEditingCylinder}
             isRequired
@@ -169,7 +166,7 @@ function CylinderCard(props: CylinderCardProps) {
 
           <Input
             type='currency'
-            value={priceFormatted}
+            value={formatCurrency(cylinder?.price || price)}
             placeholder='Preço'
             isDisabled={isEditingCylinder}
             isRequired
@@ -181,7 +178,7 @@ function CylinderCard(props: CylinderCardProps) {
 
           <Input
             type='weight'
-            value={weightFormatted}
+            value={formatCurrency(cylinder?.weight || weight)}
             placeholder='Peso'
             isDisabled={isEditingCylinder}
             isRequired
