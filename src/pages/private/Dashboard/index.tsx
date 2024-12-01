@@ -13,20 +13,26 @@ import {
   SignalCard,
   Spinner,
 } from '@/components';
-import { useDashboard, useGetClients, useGetCylinders } from '@/hooks';
+import {
+  useDashboard,
+  useGetClients,
+  useGetCylinders,
+  useGetRequests,
+} from '@/hooks';
 
-import { HISTORIES, REQUESTS } from './mocks';
+import { HISTORIES } from './mocks';
 
 export function Dashboard() {
   const { currentTab } = useDashboard();
   const { clients, isClientLoading, refreshClients } = useGetClients();
   const { cylinders, isCylindersLoading, refreshCylinders } = useGetCylinders();
+  const { requests, isRequestsLoading, refreshRequests } = useGetRequests();
 
   const navigate = useNavigate();
 
   const isClientTab = currentTab === 'clients';
   const shouldShowAddButton = isClientTab || currentTab === 'cylinders';
-  const isLoading = isClientLoading && isCylindersLoading;
+  const isLoading = isClientLoading && isCylindersLoading && isRequestsLoading;
 
   function goToRegisterRoute(): void {
     const route = isClientTab ? 'client' : 'cylinder';
@@ -49,7 +55,7 @@ export function Dashboard() {
       historic: HISTORIES.map(historic => (
         <HistoricCard {...historic} key={historic.id} />
       )),
-      requests: REQUESTS.map(signal => (
+      requests: requests.map(signal => (
         <SignalCard {...signal} key={signal.id} />
       )),
     };
@@ -57,7 +63,7 @@ export function Dashboard() {
     if (lists[currentTab].length) return <List>{lists[currentTab]}</List>;
 
     return <EmptyList />;
-  }, [currentTab, clients, cylinders]);
+  }, [currentTab, clients, cylinders, requests]);
 
   const actions = useMemo<HeaderActionProps[]>(
     () => [
@@ -86,9 +92,9 @@ export function Dashboard() {
       clients: () => refreshClients(),
       cylinders: () => refreshCylinders(),
       historic: () => {},
-      requests: () => {},
+      requests: () => refreshRequests(),
     }),
-    [refreshClients, refreshCylinders],
+    [refreshClients, refreshCylinders, refreshRequests],
   );
 
   useEffect(() => {

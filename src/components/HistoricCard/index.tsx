@@ -14,19 +14,19 @@ function HistoricCard(props: HistoricCardProps) {
   const { type, client, createdAt, status } = props;
 
   const historicDate = formatToTraditionalDate(createdAt);
-  const isPixPayment = client.cylinder.paymentType === 'pix';
+  const isPixPayment = client.cylinder.paymentType === 'PIX';
   const exchangeLabel = client.cylinder.exchange
     ? `(Troco para ${formatCurrency(client.cylinder.exchange)})`
     : '';
 
   const calendarIcons: Record<HistoricCardType, IconVariant> = {
-    accepted: 'calendar-check',
-    refused: 'calendar-x',
+    ACCEPTED: 'calendar-check',
+    REFUSED: 'calendar-x',
   };
 
   const paymentIcons: Record<HistoricPaymentType, IconVariant> = {
-    money: 'money',
-    pix: 'pix-logo',
+    MONEY: 'money',
+    PIX: 'pix-logo',
   };
 
   return (

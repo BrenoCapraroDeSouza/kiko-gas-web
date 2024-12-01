@@ -1,4 +1,4 @@
-export type SignalStatusVariant = 'collection' | 'replenishment' | 'request';
+export type SignalStatusVariant = 'COLLECTION' | 'REPLENISHMENT' | 'REQUEST';
 
 export interface SignalStatusProps {
   variant: SignalStatusVariant;

@@ -1,9 +1,9 @@
 export type ChipVariant =
-  | 'accepted'
-  | 'refused'
-  | 'replenishment'
-  | 'request'
-  | 'collection';
+  | 'ACCEPTED'
+  | 'REFUSED'
+  | 'REPLENISHMENT'
+  | 'REQUEST'
+  | 'COLLECTION';
 
 export interface ChipProps {
   variant: ChipVariant;

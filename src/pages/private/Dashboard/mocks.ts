@@ -1,93 +1,10 @@
-import { HistoricCardProps, SignalCardProps } from '@/@types';
-
-export const REQUESTS: SignalCardProps[] = [
-  {
-    id: '1',
-    type: 'collection',
-    client: {
-      id: '1',
-      name: 'Benjamin Enrico Alves',
-      cpfcnpj: '238.435.761-14',
-      address: 'Rua das Flores, 13, Balneário Camboriú - SC, 88129-912',
-      phone: '(81) 99770-9226',
-      cylinder: {
-        id: '1',
-        name: 'P13',
-        description: 'Residencial',
-        price: 140,
-        paymentType: null,
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '2',
-    type: 'request',
-    client: {
-      id: '2',
-      name: 'Gabriel da Silva',
-      cpfcnpj: '333.456.789-00',
-      address: 'Rua das Águas, 122, Itapema - SC, 88129-092',
-      phone: '(67) 98684-4681',
-      cylinder: {
-        id: '2',
-        name: 'P20',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'pix',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '3',
-    type: 'replenishment',
-    client: {
-      id: '3',
-      name: 'Rafaela Esther Gomes',
-      cpfcnpj: '156.776.298-04',
-      address: 'Rua das Arvores, 23, Itajaí - SC, 88672-109',
-      phone: '(27) 99676-8615',
-      cylinder: {
-        id: '3',
-        name: 'P13',
-        description: 'Residencial',
-        price: 140,
-        paymentType: 'money',
-        exchange: 150,
-      },
-    },
-    createdAt: new Date(),
-  },
-  {
-    id: '4',
-    type: 'request',
-    client: {
-      id: '4',
-      name: 'Rafaela Esther Gomes',
-      cpfcnpj: '156.776.298-04',
-      address: 'Rua das Arvores, 23, Itajaí - SC, 88672-109',
-      phone: '(27) 99676-8615',
-      cylinder: {
-        id: '4',
-        name: 'P20',
-        description: 'Industrial',
-        price: 140,
-        paymentType: 'money',
-        exchange: null,
-      },
-    },
-    createdAt: new Date(),
-  },
-];
+import { HistoricCardProps } from '@/@types';
 
 export const HISTORIES: HistoricCardProps[] = [
   {
     id: '1',
-    type: 'accepted',
-    status: 'collection',
+    type: 'ACCEPTED',
+    status: 'COLLECTION',
     client: {
       id: '1',
       name: 'Benjamin Enrico Alves',
@@ -98,7 +15,7 @@ export const HISTORIES: HistoricCardProps[] = [
         name: 'P20',
         description: 'Industrial',
         price: 140,
-        paymentType: 'money',
+        paymentType: 'MONEY',
         exchange: null,
       },
     },
@@ -106,8 +23,8 @@ export const HISTORIES: HistoricCardProps[] = [
   },
   {
     id: '2',
-    type: 'refused',
-    status: 'replenishment',
+    type: 'REFUSED',
+    status: 'REPLENISHMENT',
     client: {
       id: '1',
       name: 'Nilson Andrade Neto',
@@ -118,7 +35,7 @@ export const HISTORIES: HistoricCardProps[] = [
         name: 'P20',
         description: 'Industrial',
         price: 140,
-        paymentType: 'money',
+        paymentType: 'MONEY',
         exchange: null,
       },
     },
@@ -126,8 +43,8 @@ export const HISTORIES: HistoricCardProps[] = [
   },
   {
     id: '3',
-    type: 'accepted',
-    status: 'request',
+    type: 'ACCEPTED',
+    status: 'REQUEST',
     client: {
       id: '1',
       name: 'Cauã Ribas Adami Devitte',
@@ -138,7 +55,7 @@ export const HISTORIES: HistoricCardProps[] = [
         name: 'P13',
         description: 'Industrial',
         price: 140,
-        paymentType: 'pix',
+        paymentType: 'PIX',
         exchange: null,
       },
     },
@@ -146,8 +63,8 @@ export const HISTORIES: HistoricCardProps[] = [
   },
   {
     id: '4',
-    type: 'accepted',
-    status: 'request',
+    type: 'ACCEPTED',
+    status: 'REQUEST',
     client: {
       id: '1',
       name: 'Cauã Ribas Adami Devitte',
@@ -158,7 +75,7 @@ export const HISTORIES: HistoricCardProps[] = [
         name: 'P20',
         description: 'Comercial',
         price: 140,
-        paymentType: 'money',
+        paymentType: 'MONEY',
         exchange: 150,
       },
     },
